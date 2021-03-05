@@ -1,9 +1,7 @@
 ---
 layout: post
-title: You're up and running!
+title: A plain introduce to Bias and Variance
 ---
-
-# A plain introduce to Bias and Variance
 
 What is bias and variance? this is one of the most important stepping stones in machine learning, understanding bias and variance is important to learn the concepts of overfitting and underfitting.
 
