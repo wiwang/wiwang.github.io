@@ -6,9 +6,10 @@ permalink: /about/
 
 Data Scientist and Machine Learning Engineer
 
-### More Information
+### Education
+[Master of Data Science](https://www.ubc.ca/)
 
-A place to include any other types of information that you'd like to include about yourself.
+UBC’s Master of Data Science program was designed to address this workforce gap by equipping students with the technical skills, practical experience, and most importantly, the confidence to seize opportunities in an ever-expanding field.
 
 ### Contact me
 
