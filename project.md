@@ -4,4 +4,4 @@ title: Project
 permalink: /project/
 ---
 
-The projects I worked on
+The projects I worked on.
