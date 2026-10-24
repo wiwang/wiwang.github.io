@@ -4,6 +4,7 @@ import { site } from "@/lib/site";
 import { Arrow } from "@/components/icons";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { VisitCount } from "@/components/visit-count";
+import { MusicPlayer } from "@/components/music-player";
 import { Analytics } from "@/components/analytics";
 import { Nav } from "@/components/nav";
 import "./globals.css";
@@ -52,6 +53,7 @@ export default function RootLayout({
             <ThemeToggle />
           </div>
         </header>
+        <MusicPlayer />
         <main id="main">{children}</main>
         <footer className="site-footer wrap">
           <div>
