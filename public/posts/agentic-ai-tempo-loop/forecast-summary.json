@@ -1,0 +1,16 @@
+[
+  {
+    "scenario": "Baseline",
+    "p50_workdays": 16.987178236079508,
+    "p80_workdays": 19.659720229545318,
+    "p95_workdays": 22.71814622271312,
+    "probability_by_day_20": 0.825725
+  },
+  {
+    "scenario": "Unresolved API blocker",
+    "p50_workdays": 18.607937108448066,
+    "p80_workdays": 22.499600336255753,
+    "p95_workdays": 26.37871271515114,
+    "probability_by_day_20": 0.621925
+  }
+]

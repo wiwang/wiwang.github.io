@@ -1,0 +1,7 @@
+issue_key,task,median_workdays,depends_on
+DEMO-201,Scope confirmation,2.0,
+DEMO-202,API implementation,6.0,DEMO-201
+DEMO-203,UI implementation,4.0,DEMO-201
+DEMO-204,Integration,3.0,DEMO-202;DEMO-203
+DEMO-205,Validation,4.0,DEMO-204
+DEMO-206,Release preparation,1.0,DEMO-205

@@ -1,0 +1,30 @@
+[
+  {
+    "period": "Baseline",
+    "days": "0\u201314",
+    "mean_context": -0.0041820907099713684,
+    "mean_daily_p95_age_minutes": 1.7763519233863803,
+    "mean_daily_log_loss": 0.5293849548798292
+  },
+  {
+    "period": "Context shift only",
+    "days": "15\u201329",
+    "mean_context": 1.202809482261991,
+    "mean_daily_p95_age_minutes": 1.7754911818685244,
+    "mean_daily_log_loss": 0.5291502756870895
+  },
+  {
+    "period": "Injected incident",
+    "days": "30\u201339",
+    "mean_context": 1.2038053439654748,
+    "mean_daily_p95_age_minutes": 44.61782353108053,
+    "mean_daily_log_loss": 0.9437531248880486
+  },
+  {
+    "period": "Recovered",
+    "days": "40\u201359",
+    "mean_context": 1.1956404630258288,
+    "mean_daily_p95_age_minutes": 1.7773737289477727,
+    "mean_daily_log_loss": 0.5247926342778457
+  }
+]
