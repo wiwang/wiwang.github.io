@@ -1,0 +1,541 @@
+query_id,method,k,required_evidence_recall,complete_evidence
+DEMOA-q1,BM25 without UI scope,1,0.0,0
+DEMOA-q1,BM25 without UI scope,2,0.0,0
+DEMOA-q1,BM25 without UI scope,3,0.0,0
+DEMOA-q1,BM25 without UI scope,4,1.0,1
+DEMOA-q1,BM25 without UI scope,5,1.0,1
+DEMOA-q1,BM25 without UI scope,6,1.0,1
+DEMOA-q1,UI-scoped BM25,1,0.0,0
+DEMOA-q1,UI-scoped BM25,2,0.0,0
+DEMOA-q1,UI-scoped BM25,3,0.0,0
+DEMOA-q1,UI-scoped BM25,4,1.0,1
+DEMOA-q1,UI-scoped BM25,5,1.0,1
+DEMOA-q1,UI-scoped BM25,6,1.0,1
+DEMOA-q1,UI scope + term expansion,1,1.0,1
+DEMOA-q1,UI scope + term expansion,2,1.0,1
+DEMOA-q1,UI scope + term expansion,3,1.0,1
+DEMOA-q1,UI scope + term expansion,4,1.0,1
+DEMOA-q1,UI scope + term expansion,5,1.0,1
+DEMOA-q1,UI scope + term expansion,6,1.0,1
+DEMOA-q2,BM25 without UI scope,1,0.0,0
+DEMOA-q2,BM25 without UI scope,2,0.5,0
+DEMOA-q2,BM25 without UI scope,3,0.5,0
+DEMOA-q2,BM25 without UI scope,4,1.0,1
+DEMOA-q2,BM25 without UI scope,5,1.0,1
+DEMOA-q2,BM25 without UI scope,6,1.0,1
+DEMOA-q2,UI-scoped BM25,1,0.0,0
+DEMOA-q2,UI-scoped BM25,2,0.5,0
+DEMOA-q2,UI-scoped BM25,3,0.5,0
+DEMOA-q2,UI-scoped BM25,4,1.0,1
+DEMOA-q2,UI-scoped BM25,5,1.0,1
+DEMOA-q2,UI-scoped BM25,6,1.0,1
+DEMOA-q2,UI scope + term expansion,1,0.5,0
+DEMOA-q2,UI scope + term expansion,2,1.0,1
+DEMOA-q2,UI scope + term expansion,3,1.0,1
+DEMOA-q2,UI scope + term expansion,4,1.0,1
+DEMOA-q2,UI scope + term expansion,5,1.0,1
+DEMOA-q2,UI scope + term expansion,6,1.0,1
+DEMOA-q3,BM25 without UI scope,1,0.5,0
+DEMOA-q3,BM25 without UI scope,2,1.0,1
+DEMOA-q3,BM25 without UI scope,3,1.0,1
+DEMOA-q3,BM25 without UI scope,4,1.0,1
+DEMOA-q3,BM25 without UI scope,5,1.0,1
+DEMOA-q3,BM25 without UI scope,6,1.0,1
+DEMOA-q3,UI-scoped BM25,1,0.5,0
+DEMOA-q3,UI-scoped BM25,2,1.0,1
+DEMOA-q3,UI-scoped BM25,3,1.0,1
+DEMOA-q3,UI-scoped BM25,4,1.0,1
+DEMOA-q3,UI-scoped BM25,5,1.0,1
+DEMOA-q3,UI-scoped BM25,6,1.0,1
+DEMOA-q3,UI scope + term expansion,1,0.5,0
+DEMOA-q3,UI scope + term expansion,2,1.0,1
+DEMOA-q3,UI scope + term expansion,3,1.0,1
+DEMOA-q3,UI scope + term expansion,4,1.0,1
+DEMOA-q3,UI scope + term expansion,5,1.0,1
+DEMOA-q3,UI scope + term expansion,6,1.0,1
+DEMOA-q4,BM25 without UI scope,1,0.5,0
+DEMOA-q4,BM25 without UI scope,2,1.0,1
+DEMOA-q4,BM25 without UI scope,3,1.0,1
+DEMOA-q4,BM25 without UI scope,4,1.0,1
+DEMOA-q4,BM25 without UI scope,5,1.0,1
+DEMOA-q4,BM25 without UI scope,6,1.0,1
+DEMOA-q4,UI-scoped BM25,1,0.5,0
+DEMOA-q4,UI-scoped BM25,2,1.0,1
+DEMOA-q4,UI-scoped BM25,3,1.0,1
+DEMOA-q4,UI-scoped BM25,4,1.0,1
+DEMOA-q4,UI-scoped BM25,5,1.0,1
+DEMOA-q4,UI-scoped BM25,6,1.0,1
+DEMOA-q4,UI scope + term expansion,1,0.5,0
+DEMOA-q4,UI scope + term expansion,2,1.0,1
+DEMOA-q4,UI scope + term expansion,3,1.0,1
+DEMOA-q4,UI scope + term expansion,4,1.0,1
+DEMOA-q4,UI scope + term expansion,5,1.0,1
+DEMOA-q4,UI scope + term expansion,6,1.0,1
+DEMOA-q5,BM25 without UI scope,1,0.0,0
+DEMOA-q5,BM25 without UI scope,2,0.0,0
+DEMOA-q5,BM25 without UI scope,3,1.0,1
+DEMOA-q5,BM25 without UI scope,4,1.0,1
+DEMOA-q5,BM25 without UI scope,5,1.0,1
+DEMOA-q5,BM25 without UI scope,6,1.0,1
+DEMOA-q5,UI-scoped BM25,1,0.0,0
+DEMOA-q5,UI-scoped BM25,2,0.0,0
+DEMOA-q5,UI-scoped BM25,3,1.0,1
+DEMOA-q5,UI-scoped BM25,4,1.0,1
+DEMOA-q5,UI-scoped BM25,5,1.0,1
+DEMOA-q5,UI-scoped BM25,6,1.0,1
+DEMOA-q5,UI scope + term expansion,1,1.0,1
+DEMOA-q5,UI scope + term expansion,2,1.0,1
+DEMOA-q5,UI scope + term expansion,3,1.0,1
+DEMOA-q5,UI scope + term expansion,4,1.0,1
+DEMOA-q5,UI scope + term expansion,5,1.0,1
+DEMOA-q5,UI scope + term expansion,6,1.0,1
+DEMOB-q1,BM25 without UI scope,1,0.0,0
+DEMOB-q1,BM25 without UI scope,2,0.0,0
+DEMOB-q1,BM25 without UI scope,3,0.0,0
+DEMOB-q1,BM25 without UI scope,4,0.0,0
+DEMOB-q1,BM25 without UI scope,5,0.0,0
+DEMOB-q1,BM25 without UI scope,6,0.0,0
+DEMOB-q1,UI-scoped BM25,1,0.0,0
+DEMOB-q1,UI-scoped BM25,2,0.0,0
+DEMOB-q1,UI-scoped BM25,3,0.0,0
+DEMOB-q1,UI-scoped BM25,4,1.0,1
+DEMOB-q1,UI-scoped BM25,5,1.0,1
+DEMOB-q1,UI-scoped BM25,6,1.0,1
+DEMOB-q1,UI scope + term expansion,1,1.0,1
+DEMOB-q1,UI scope + term expansion,2,1.0,1
+DEMOB-q1,UI scope + term expansion,3,1.0,1
+DEMOB-q1,UI scope + term expansion,4,1.0,1
+DEMOB-q1,UI scope + term expansion,5,1.0,1
+DEMOB-q1,UI scope + term expansion,6,1.0,1
+DEMOB-q2,BM25 without UI scope,1,0.0,0
+DEMOB-q2,BM25 without UI scope,2,0.0,0
+DEMOB-q2,BM25 without UI scope,3,0.0,0
+DEMOB-q2,BM25 without UI scope,4,0.0,0
+DEMOB-q2,BM25 without UI scope,5,0.0,0
+DEMOB-q2,BM25 without UI scope,6,0.0,0
+DEMOB-q2,UI-scoped BM25,1,0.0,0
+DEMOB-q2,UI-scoped BM25,2,0.5,0
+DEMOB-q2,UI-scoped BM25,3,0.5,0
+DEMOB-q2,UI-scoped BM25,4,1.0,1
+DEMOB-q2,UI-scoped BM25,5,1.0,1
+DEMOB-q2,UI-scoped BM25,6,1.0,1
+DEMOB-q2,UI scope + term expansion,1,0.5,0
+DEMOB-q2,UI scope + term expansion,2,1.0,1
+DEMOB-q2,UI scope + term expansion,3,1.0,1
+DEMOB-q2,UI scope + term expansion,4,1.0,1
+DEMOB-q2,UI scope + term expansion,5,1.0,1
+DEMOB-q2,UI scope + term expansion,6,1.0,1
+DEMOB-q3,BM25 without UI scope,1,0.0,0
+DEMOB-q3,BM25 without UI scope,2,0.0,0
+DEMOB-q3,BM25 without UI scope,3,0.5,0
+DEMOB-q3,BM25 without UI scope,4,1.0,1
+DEMOB-q3,BM25 without UI scope,5,1.0,1
+DEMOB-q3,BM25 without UI scope,6,1.0,1
+DEMOB-q3,UI-scoped BM25,1,0.5,0
+DEMOB-q3,UI-scoped BM25,2,1.0,1
+DEMOB-q3,UI-scoped BM25,3,1.0,1
+DEMOB-q3,UI-scoped BM25,4,1.0,1
+DEMOB-q3,UI-scoped BM25,5,1.0,1
+DEMOB-q3,UI-scoped BM25,6,1.0,1
+DEMOB-q3,UI scope + term expansion,1,0.5,0
+DEMOB-q3,UI scope + term expansion,2,1.0,1
+DEMOB-q3,UI scope + term expansion,3,1.0,1
+DEMOB-q3,UI scope + term expansion,4,1.0,1
+DEMOB-q3,UI scope + term expansion,5,1.0,1
+DEMOB-q3,UI scope + term expansion,6,1.0,1
+DEMOB-q4,BM25 without UI scope,1,0.0,0
+DEMOB-q4,BM25 without UI scope,2,0.0,0
+DEMOB-q4,BM25 without UI scope,3,0.0,0
+DEMOB-q4,BM25 without UI scope,4,0.0,0
+DEMOB-q4,BM25 without UI scope,5,0.0,0
+DEMOB-q4,BM25 without UI scope,6,0.0,0
+DEMOB-q4,UI-scoped BM25,1,0.5,0
+DEMOB-q4,UI-scoped BM25,2,1.0,1
+DEMOB-q4,UI-scoped BM25,3,1.0,1
+DEMOB-q4,UI-scoped BM25,4,1.0,1
+DEMOB-q4,UI-scoped BM25,5,1.0,1
+DEMOB-q4,UI-scoped BM25,6,1.0,1
+DEMOB-q4,UI scope + term expansion,1,0.5,0
+DEMOB-q4,UI scope + term expansion,2,1.0,1
+DEMOB-q4,UI scope + term expansion,3,1.0,1
+DEMOB-q4,UI scope + term expansion,4,1.0,1
+DEMOB-q4,UI scope + term expansion,5,1.0,1
+DEMOB-q4,UI scope + term expansion,6,1.0,1
+DEMOB-q5,BM25 without UI scope,1,0.0,0
+DEMOB-q5,BM25 without UI scope,2,0.0,0
+DEMOB-q5,BM25 without UI scope,3,0.0,0
+DEMOB-q5,BM25 without UI scope,4,0.0,0
+DEMOB-q5,BM25 without UI scope,5,0.0,0
+DEMOB-q5,BM25 without UI scope,6,0.0,0
+DEMOB-q5,UI-scoped BM25,1,0.0,0
+DEMOB-q5,UI-scoped BM25,2,0.0,0
+DEMOB-q5,UI-scoped BM25,3,1.0,1
+DEMOB-q5,UI-scoped BM25,4,1.0,1
+DEMOB-q5,UI-scoped BM25,5,1.0,1
+DEMOB-q5,UI-scoped BM25,6,1.0,1
+DEMOB-q5,UI scope + term expansion,1,1.0,1
+DEMOB-q5,UI scope + term expansion,2,1.0,1
+DEMOB-q5,UI scope + term expansion,3,1.0,1
+DEMOB-q5,UI scope + term expansion,4,1.0,1
+DEMOB-q5,UI scope + term expansion,5,1.0,1
+DEMOB-q5,UI scope + term expansion,6,1.0,1
+DEMOC-q1,BM25 without UI scope,1,0.0,0
+DEMOC-q1,BM25 without UI scope,2,0.0,0
+DEMOC-q1,BM25 without UI scope,3,0.0,0
+DEMOC-q1,BM25 without UI scope,4,0.0,0
+DEMOC-q1,BM25 without UI scope,5,0.0,0
+DEMOC-q1,BM25 without UI scope,6,0.0,0
+DEMOC-q1,UI-scoped BM25,1,0.0,0
+DEMOC-q1,UI-scoped BM25,2,0.0,0
+DEMOC-q1,UI-scoped BM25,3,0.0,0
+DEMOC-q1,UI-scoped BM25,4,1.0,1
+DEMOC-q1,UI-scoped BM25,5,1.0,1
+DEMOC-q1,UI-scoped BM25,6,1.0,1
+DEMOC-q1,UI scope + term expansion,1,1.0,1
+DEMOC-q1,UI scope + term expansion,2,1.0,1
+DEMOC-q1,UI scope + term expansion,3,1.0,1
+DEMOC-q1,UI scope + term expansion,4,1.0,1
+DEMOC-q1,UI scope + term expansion,5,1.0,1
+DEMOC-q1,UI scope + term expansion,6,1.0,1
+DEMOC-q2,BM25 without UI scope,1,0.0,0
+DEMOC-q2,BM25 without UI scope,2,0.0,0
+DEMOC-q2,BM25 without UI scope,3,0.0,0
+DEMOC-q2,BM25 without UI scope,4,0.0,0
+DEMOC-q2,BM25 without UI scope,5,0.0,0
+DEMOC-q2,BM25 without UI scope,6,0.0,0
+DEMOC-q2,UI-scoped BM25,1,0.0,0
+DEMOC-q2,UI-scoped BM25,2,0.5,0
+DEMOC-q2,UI-scoped BM25,3,0.5,0
+DEMOC-q2,UI-scoped BM25,4,1.0,1
+DEMOC-q2,UI-scoped BM25,5,1.0,1
+DEMOC-q2,UI-scoped BM25,6,1.0,1
+DEMOC-q2,UI scope + term expansion,1,0.5,0
+DEMOC-q2,UI scope + term expansion,2,1.0,1
+DEMOC-q2,UI scope + term expansion,3,1.0,1
+DEMOC-q2,UI scope + term expansion,4,1.0,1
+DEMOC-q2,UI scope + term expansion,5,1.0,1
+DEMOC-q2,UI scope + term expansion,6,1.0,1
+DEMOC-q3,BM25 without UI scope,1,0.0,0
+DEMOC-q3,BM25 without UI scope,2,0.0,0
+DEMOC-q3,BM25 without UI scope,3,0.0,0
+DEMOC-q3,BM25 without UI scope,4,0.0,0
+DEMOC-q3,BM25 without UI scope,5,0.5,0
+DEMOC-q3,BM25 without UI scope,6,1.0,1
+DEMOC-q3,UI-scoped BM25,1,0.5,0
+DEMOC-q3,UI-scoped BM25,2,1.0,1
+DEMOC-q3,UI-scoped BM25,3,1.0,1
+DEMOC-q3,UI-scoped BM25,4,1.0,1
+DEMOC-q3,UI-scoped BM25,5,1.0,1
+DEMOC-q3,UI-scoped BM25,6,1.0,1
+DEMOC-q3,UI scope + term expansion,1,0.5,0
+DEMOC-q3,UI scope + term expansion,2,1.0,1
+DEMOC-q3,UI scope + term expansion,3,1.0,1
+DEMOC-q3,UI scope + term expansion,4,1.0,1
+DEMOC-q3,UI scope + term expansion,5,1.0,1
+DEMOC-q3,UI scope + term expansion,6,1.0,1
+DEMOC-q4,BM25 without UI scope,1,0.0,0
+DEMOC-q4,BM25 without UI scope,2,0.0,0
+DEMOC-q4,BM25 without UI scope,3,0.0,0
+DEMOC-q4,BM25 without UI scope,4,0.0,0
+DEMOC-q4,BM25 without UI scope,5,0.0,0
+DEMOC-q4,BM25 without UI scope,6,0.0,0
+DEMOC-q4,UI-scoped BM25,1,0.5,0
+DEMOC-q4,UI-scoped BM25,2,1.0,1
+DEMOC-q4,UI-scoped BM25,3,1.0,1
+DEMOC-q4,UI-scoped BM25,4,1.0,1
+DEMOC-q4,UI-scoped BM25,5,1.0,1
+DEMOC-q4,UI-scoped BM25,6,1.0,1
+DEMOC-q4,UI scope + term expansion,1,0.5,0
+DEMOC-q4,UI scope + term expansion,2,1.0,1
+DEMOC-q4,UI scope + term expansion,3,1.0,1
+DEMOC-q4,UI scope + term expansion,4,1.0,1
+DEMOC-q4,UI scope + term expansion,5,1.0,1
+DEMOC-q4,UI scope + term expansion,6,1.0,1
+DEMOC-q5,BM25 without UI scope,1,0.0,0
+DEMOC-q5,BM25 without UI scope,2,0.0,0
+DEMOC-q5,BM25 without UI scope,3,0.0,0
+DEMOC-q5,BM25 without UI scope,4,0.0,0
+DEMOC-q5,BM25 without UI scope,5,0.0,0
+DEMOC-q5,BM25 without UI scope,6,0.0,0
+DEMOC-q5,UI-scoped BM25,1,0.0,0
+DEMOC-q5,UI-scoped BM25,2,0.0,0
+DEMOC-q5,UI-scoped BM25,3,1.0,1
+DEMOC-q5,UI-scoped BM25,4,1.0,1
+DEMOC-q5,UI-scoped BM25,5,1.0,1
+DEMOC-q5,UI-scoped BM25,6,1.0,1
+DEMOC-q5,UI scope + term expansion,1,1.0,1
+DEMOC-q5,UI scope + term expansion,2,1.0,1
+DEMOC-q5,UI scope + term expansion,3,1.0,1
+DEMOC-q5,UI scope + term expansion,4,1.0,1
+DEMOC-q5,UI scope + term expansion,5,1.0,1
+DEMOC-q5,UI scope + term expansion,6,1.0,1
+DEMOD-q1,BM25 without UI scope,1,0.0,0
+DEMOD-q1,BM25 without UI scope,2,0.0,0
+DEMOD-q1,BM25 without UI scope,3,0.0,0
+DEMOD-q1,BM25 without UI scope,4,0.0,0
+DEMOD-q1,BM25 without UI scope,5,0.0,0
+DEMOD-q1,BM25 without UI scope,6,0.0,0
+DEMOD-q1,UI-scoped BM25,1,0.0,0
+DEMOD-q1,UI-scoped BM25,2,0.0,0
+DEMOD-q1,UI-scoped BM25,3,0.0,0
+DEMOD-q1,UI-scoped BM25,4,1.0,1
+DEMOD-q1,UI-scoped BM25,5,1.0,1
+DEMOD-q1,UI-scoped BM25,6,1.0,1
+DEMOD-q1,UI scope + term expansion,1,1.0,1
+DEMOD-q1,UI scope + term expansion,2,1.0,1
+DEMOD-q1,UI scope + term expansion,3,1.0,1
+DEMOD-q1,UI scope + term expansion,4,1.0,1
+DEMOD-q1,UI scope + term expansion,5,1.0,1
+DEMOD-q1,UI scope + term expansion,6,1.0,1
+DEMOD-q2,BM25 without UI scope,1,0.0,0
+DEMOD-q2,BM25 without UI scope,2,0.0,0
+DEMOD-q2,BM25 without UI scope,3,0.0,0
+DEMOD-q2,BM25 without UI scope,4,0.0,0
+DEMOD-q2,BM25 without UI scope,5,0.0,0
+DEMOD-q2,BM25 without UI scope,6,0.0,0
+DEMOD-q2,UI-scoped BM25,1,0.0,0
+DEMOD-q2,UI-scoped BM25,2,0.5,0
+DEMOD-q2,UI-scoped BM25,3,0.5,0
+DEMOD-q2,UI-scoped BM25,4,1.0,1
+DEMOD-q2,UI-scoped BM25,5,1.0,1
+DEMOD-q2,UI-scoped BM25,6,1.0,1
+DEMOD-q2,UI scope + term expansion,1,0.5,0
+DEMOD-q2,UI scope + term expansion,2,1.0,1
+DEMOD-q2,UI scope + term expansion,3,1.0,1
+DEMOD-q2,UI scope + term expansion,4,1.0,1
+DEMOD-q2,UI scope + term expansion,5,1.0,1
+DEMOD-q2,UI scope + term expansion,6,1.0,1
+DEMOD-q3,BM25 without UI scope,1,0.0,0
+DEMOD-q3,BM25 without UI scope,2,0.0,0
+DEMOD-q3,BM25 without UI scope,3,0.0,0
+DEMOD-q3,BM25 without UI scope,4,0.0,0
+DEMOD-q3,BM25 without UI scope,5,0.0,0
+DEMOD-q3,BM25 without UI scope,6,0.0,0
+DEMOD-q3,UI-scoped BM25,1,0.5,0
+DEMOD-q3,UI-scoped BM25,2,1.0,1
+DEMOD-q3,UI-scoped BM25,3,1.0,1
+DEMOD-q3,UI-scoped BM25,4,1.0,1
+DEMOD-q3,UI-scoped BM25,5,1.0,1
+DEMOD-q3,UI-scoped BM25,6,1.0,1
+DEMOD-q3,UI scope + term expansion,1,0.5,0
+DEMOD-q3,UI scope + term expansion,2,1.0,1
+DEMOD-q3,UI scope + term expansion,3,1.0,1
+DEMOD-q3,UI scope + term expansion,4,1.0,1
+DEMOD-q3,UI scope + term expansion,5,1.0,1
+DEMOD-q3,UI scope + term expansion,6,1.0,1
+DEMOD-q4,BM25 without UI scope,1,0.0,0
+DEMOD-q4,BM25 without UI scope,2,0.0,0
+DEMOD-q4,BM25 without UI scope,3,0.0,0
+DEMOD-q4,BM25 without UI scope,4,0.0,0
+DEMOD-q4,BM25 without UI scope,5,0.0,0
+DEMOD-q4,BM25 without UI scope,6,0.0,0
+DEMOD-q4,UI-scoped BM25,1,0.5,0
+DEMOD-q4,UI-scoped BM25,2,1.0,1
+DEMOD-q4,UI-scoped BM25,3,1.0,1
+DEMOD-q4,UI-scoped BM25,4,1.0,1
+DEMOD-q4,UI-scoped BM25,5,1.0,1
+DEMOD-q4,UI-scoped BM25,6,1.0,1
+DEMOD-q4,UI scope + term expansion,1,0.5,0
+DEMOD-q4,UI scope + term expansion,2,1.0,1
+DEMOD-q4,UI scope + term expansion,3,1.0,1
+DEMOD-q4,UI scope + term expansion,4,1.0,1
+DEMOD-q4,UI scope + term expansion,5,1.0,1
+DEMOD-q4,UI scope + term expansion,6,1.0,1
+DEMOD-q5,BM25 without UI scope,1,0.0,0
+DEMOD-q5,BM25 without UI scope,2,0.0,0
+DEMOD-q5,BM25 without UI scope,3,0.0,0
+DEMOD-q5,BM25 without UI scope,4,0.0,0
+DEMOD-q5,BM25 without UI scope,5,0.0,0
+DEMOD-q5,BM25 without UI scope,6,0.0,0
+DEMOD-q5,UI-scoped BM25,1,0.0,0
+DEMOD-q5,UI-scoped BM25,2,0.0,0
+DEMOD-q5,UI-scoped BM25,3,1.0,1
+DEMOD-q5,UI-scoped BM25,4,1.0,1
+DEMOD-q5,UI-scoped BM25,5,1.0,1
+DEMOD-q5,UI-scoped BM25,6,1.0,1
+DEMOD-q5,UI scope + term expansion,1,1.0,1
+DEMOD-q5,UI scope + term expansion,2,1.0,1
+DEMOD-q5,UI scope + term expansion,3,1.0,1
+DEMOD-q5,UI scope + term expansion,4,1.0,1
+DEMOD-q5,UI scope + term expansion,5,1.0,1
+DEMOD-q5,UI scope + term expansion,6,1.0,1
+DEMOE-q1,BM25 without UI scope,1,0.0,0
+DEMOE-q1,BM25 without UI scope,2,0.0,0
+DEMOE-q1,BM25 without UI scope,3,0.0,0
+DEMOE-q1,BM25 without UI scope,4,0.0,0
+DEMOE-q1,BM25 without UI scope,5,0.0,0
+DEMOE-q1,BM25 without UI scope,6,0.0,0
+DEMOE-q1,UI-scoped BM25,1,0.0,0
+DEMOE-q1,UI-scoped BM25,2,0.0,0
+DEMOE-q1,UI-scoped BM25,3,0.0,0
+DEMOE-q1,UI-scoped BM25,4,1.0,1
+DEMOE-q1,UI-scoped BM25,5,1.0,1
+DEMOE-q1,UI-scoped BM25,6,1.0,1
+DEMOE-q1,UI scope + term expansion,1,1.0,1
+DEMOE-q1,UI scope + term expansion,2,1.0,1
+DEMOE-q1,UI scope + term expansion,3,1.0,1
+DEMOE-q1,UI scope + term expansion,4,1.0,1
+DEMOE-q1,UI scope + term expansion,5,1.0,1
+DEMOE-q1,UI scope + term expansion,6,1.0,1
+DEMOE-q2,BM25 without UI scope,1,0.0,0
+DEMOE-q2,BM25 without UI scope,2,0.0,0
+DEMOE-q2,BM25 without UI scope,3,0.0,0
+DEMOE-q2,BM25 without UI scope,4,0.0,0
+DEMOE-q2,BM25 without UI scope,5,0.0,0
+DEMOE-q2,BM25 without UI scope,6,0.0,0
+DEMOE-q2,UI-scoped BM25,1,0.0,0
+DEMOE-q2,UI-scoped BM25,2,0.5,0
+DEMOE-q2,UI-scoped BM25,3,0.5,0
+DEMOE-q2,UI-scoped BM25,4,1.0,1
+DEMOE-q2,UI-scoped BM25,5,1.0,1
+DEMOE-q2,UI-scoped BM25,6,1.0,1
+DEMOE-q2,UI scope + term expansion,1,0.5,0
+DEMOE-q2,UI scope + term expansion,2,1.0,1
+DEMOE-q2,UI scope + term expansion,3,1.0,1
+DEMOE-q2,UI scope + term expansion,4,1.0,1
+DEMOE-q2,UI scope + term expansion,5,1.0,1
+DEMOE-q2,UI scope + term expansion,6,1.0,1
+DEMOE-q3,BM25 without UI scope,1,0.0,0
+DEMOE-q3,BM25 without UI scope,2,0.0,0
+DEMOE-q3,BM25 without UI scope,3,0.0,0
+DEMOE-q3,BM25 without UI scope,4,0.0,0
+DEMOE-q3,BM25 without UI scope,5,0.0,0
+DEMOE-q3,BM25 without UI scope,6,0.0,0
+DEMOE-q3,UI-scoped BM25,1,0.5,0
+DEMOE-q3,UI-scoped BM25,2,1.0,1
+DEMOE-q3,UI-scoped BM25,3,1.0,1
+DEMOE-q3,UI-scoped BM25,4,1.0,1
+DEMOE-q3,UI-scoped BM25,5,1.0,1
+DEMOE-q3,UI-scoped BM25,6,1.0,1
+DEMOE-q3,UI scope + term expansion,1,0.5,0
+DEMOE-q3,UI scope + term expansion,2,1.0,1
+DEMOE-q3,UI scope + term expansion,3,1.0,1
+DEMOE-q3,UI scope + term expansion,4,1.0,1
+DEMOE-q3,UI scope + term expansion,5,1.0,1
+DEMOE-q3,UI scope + term expansion,6,1.0,1
+DEMOE-q4,BM25 without UI scope,1,0.0,0
+DEMOE-q4,BM25 without UI scope,2,0.0,0
+DEMOE-q4,BM25 without UI scope,3,0.0,0
+DEMOE-q4,BM25 without UI scope,4,0.0,0
+DEMOE-q4,BM25 without UI scope,5,0.0,0
+DEMOE-q4,BM25 without UI scope,6,0.0,0
+DEMOE-q4,UI-scoped BM25,1,0.5,0
+DEMOE-q4,UI-scoped BM25,2,1.0,1
+DEMOE-q4,UI-scoped BM25,3,1.0,1
+DEMOE-q4,UI-scoped BM25,4,1.0,1
+DEMOE-q4,UI-scoped BM25,5,1.0,1
+DEMOE-q4,UI-scoped BM25,6,1.0,1
+DEMOE-q4,UI scope + term expansion,1,0.5,0
+DEMOE-q4,UI scope + term expansion,2,1.0,1
+DEMOE-q4,UI scope + term expansion,3,1.0,1
+DEMOE-q4,UI scope + term expansion,4,1.0,1
+DEMOE-q4,UI scope + term expansion,5,1.0,1
+DEMOE-q4,UI scope + term expansion,6,1.0,1
+DEMOE-q5,BM25 without UI scope,1,0.0,0
+DEMOE-q5,BM25 without UI scope,2,0.0,0
+DEMOE-q5,BM25 without UI scope,3,0.0,0
+DEMOE-q5,BM25 without UI scope,4,0.0,0
+DEMOE-q5,BM25 without UI scope,5,0.0,0
+DEMOE-q5,BM25 without UI scope,6,0.0,0
+DEMOE-q5,UI-scoped BM25,1,0.0,0
+DEMOE-q5,UI-scoped BM25,2,0.0,0
+DEMOE-q5,UI-scoped BM25,3,1.0,1
+DEMOE-q5,UI-scoped BM25,4,1.0,1
+DEMOE-q5,UI-scoped BM25,5,1.0,1
+DEMOE-q5,UI-scoped BM25,6,1.0,1
+DEMOE-q5,UI scope + term expansion,1,1.0,1
+DEMOE-q5,UI scope + term expansion,2,1.0,1
+DEMOE-q5,UI scope + term expansion,3,1.0,1
+DEMOE-q5,UI scope + term expansion,4,1.0,1
+DEMOE-q5,UI scope + term expansion,5,1.0,1
+DEMOE-q5,UI scope + term expansion,6,1.0,1
+DEMOF-q1,BM25 without UI scope,1,0.0,0
+DEMOF-q1,BM25 without UI scope,2,0.0,0
+DEMOF-q1,BM25 without UI scope,3,0.0,0
+DEMOF-q1,BM25 without UI scope,4,0.0,0
+DEMOF-q1,BM25 without UI scope,5,0.0,0
+DEMOF-q1,BM25 without UI scope,6,0.0,0
+DEMOF-q1,UI-scoped BM25,1,0.0,0
+DEMOF-q1,UI-scoped BM25,2,0.0,0
+DEMOF-q1,UI-scoped BM25,3,0.0,0
+DEMOF-q1,UI-scoped BM25,4,1.0,1
+DEMOF-q1,UI-scoped BM25,5,1.0,1
+DEMOF-q1,UI-scoped BM25,6,1.0,1
+DEMOF-q1,UI scope + term expansion,1,1.0,1
+DEMOF-q1,UI scope + term expansion,2,1.0,1
+DEMOF-q1,UI scope + term expansion,3,1.0,1
+DEMOF-q1,UI scope + term expansion,4,1.0,1
+DEMOF-q1,UI scope + term expansion,5,1.0,1
+DEMOF-q1,UI scope + term expansion,6,1.0,1
+DEMOF-q2,BM25 without UI scope,1,0.0,0
+DEMOF-q2,BM25 without UI scope,2,0.0,0
+DEMOF-q2,BM25 without UI scope,3,0.0,0
+DEMOF-q2,BM25 without UI scope,4,0.0,0
+DEMOF-q2,BM25 without UI scope,5,0.0,0
+DEMOF-q2,BM25 without UI scope,6,0.0,0
+DEMOF-q2,UI-scoped BM25,1,0.0,0
+DEMOF-q2,UI-scoped BM25,2,0.5,0
+DEMOF-q2,UI-scoped BM25,3,0.5,0
+DEMOF-q2,UI-scoped BM25,4,1.0,1
+DEMOF-q2,UI-scoped BM25,5,1.0,1
+DEMOF-q2,UI-scoped BM25,6,1.0,1
+DEMOF-q2,UI scope + term expansion,1,0.5,0
+DEMOF-q2,UI scope + term expansion,2,1.0,1
+DEMOF-q2,UI scope + term expansion,3,1.0,1
+DEMOF-q2,UI scope + term expansion,4,1.0,1
+DEMOF-q2,UI scope + term expansion,5,1.0,1
+DEMOF-q2,UI scope + term expansion,6,1.0,1
+DEMOF-q3,BM25 without UI scope,1,0.0,0
+DEMOF-q3,BM25 without UI scope,2,0.0,0
+DEMOF-q3,BM25 without UI scope,3,0.0,0
+DEMOF-q3,BM25 without UI scope,4,0.0,0
+DEMOF-q3,BM25 without UI scope,5,0.0,0
+DEMOF-q3,BM25 without UI scope,6,0.0,0
+DEMOF-q3,UI-scoped BM25,1,0.5,0
+DEMOF-q3,UI-scoped BM25,2,1.0,1
+DEMOF-q3,UI-scoped BM25,3,1.0,1
+DEMOF-q3,UI-scoped BM25,4,1.0,1
+DEMOF-q3,UI-scoped BM25,5,1.0,1
+DEMOF-q3,UI-scoped BM25,6,1.0,1
+DEMOF-q3,UI scope + term expansion,1,0.5,0
+DEMOF-q3,UI scope + term expansion,2,1.0,1
+DEMOF-q3,UI scope + term expansion,3,1.0,1
+DEMOF-q3,UI scope + term expansion,4,1.0,1
+DEMOF-q3,UI scope + term expansion,5,1.0,1
+DEMOF-q3,UI scope + term expansion,6,1.0,1
+DEMOF-q4,BM25 without UI scope,1,0.0,0
+DEMOF-q4,BM25 without UI scope,2,0.0,0
+DEMOF-q4,BM25 without UI scope,3,0.0,0
+DEMOF-q4,BM25 without UI scope,4,0.0,0
+DEMOF-q4,BM25 without UI scope,5,0.0,0
+DEMOF-q4,BM25 without UI scope,6,0.0,0
+DEMOF-q4,UI-scoped BM25,1,0.5,0
+DEMOF-q4,UI-scoped BM25,2,1.0,1
+DEMOF-q4,UI-scoped BM25,3,1.0,1
+DEMOF-q4,UI-scoped BM25,4,1.0,1
+DEMOF-q4,UI-scoped BM25,5,1.0,1
+DEMOF-q4,UI-scoped BM25,6,1.0,1
+DEMOF-q4,UI scope + term expansion,1,0.5,0
+DEMOF-q4,UI scope + term expansion,2,1.0,1
+DEMOF-q4,UI scope + term expansion,3,1.0,1
+DEMOF-q4,UI scope + term expansion,4,1.0,1
+DEMOF-q4,UI scope + term expansion,5,1.0,1
+DEMOF-q4,UI scope + term expansion,6,1.0,1
+DEMOF-q5,BM25 without UI scope,1,0.0,0
+DEMOF-q5,BM25 without UI scope,2,0.0,0
+DEMOF-q5,BM25 without UI scope,3,0.0,0
+DEMOF-q5,BM25 without UI scope,4,0.0,0
+DEMOF-q5,BM25 without UI scope,5,0.0,0
+DEMOF-q5,BM25 without UI scope,6,0.0,0
+DEMOF-q5,UI-scoped BM25,1,0.0,0
+DEMOF-q5,UI-scoped BM25,2,0.0,0
+DEMOF-q5,UI-scoped BM25,3,1.0,1
+DEMOF-q5,UI-scoped BM25,4,1.0,1
+DEMOF-q5,UI-scoped BM25,5,1.0,1
+DEMOF-q5,UI-scoped BM25,6,1.0,1
+DEMOF-q5,UI scope + term expansion,1,1.0,1
+DEMOF-q5,UI scope + term expansion,2,1.0,1
+DEMOF-q5,UI scope + term expansion,3,1.0,1
+DEMOF-q5,UI scope + term expansion,4,1.0,1
+DEMOF-q5,UI scope + term expansion,5,1.0,1
+DEMOF-q5,UI scope + term expansion,6,1.0,1

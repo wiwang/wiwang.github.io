@@ -1,0 +1,320 @@
+[
+  {
+    "query_id": "DEMOA-q1",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOA",
+    "as_of": "2025-11-11",
+    "question": "When can this ship?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOA:deadline:current"
+    ]
+  },
+  {
+    "query_id": "DEMOA-q2",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOA",
+    "as_of": "2025-11-11",
+    "question": "Why might this slip?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOA:deadline:current",
+      "synthetic-org-a:DEMOA:blocker:current"
+    ]
+  },
+  {
+    "query_id": "DEMOA-q3",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOA",
+    "as_of": "2025-11-11",
+    "question": "Who should clear this dependency?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOA:owner:current",
+      "synthetic-org-a:DEMOA:blocker:current"
+    ]
+  },
+  {
+    "query_id": "DEMOA-q4",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOA",
+    "as_of": "2025-11-11",
+    "question": "Is this ready?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOA:acceptance:current",
+      "synthetic-org-a:DEMOA:blocker:current"
+    ]
+  },
+  {
+    "query_id": "DEMOA-q5",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOA",
+    "as_of": "2025-11-11",
+    "question": "Do we have bandwidth?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOA:capacity:current"
+    ]
+  },
+  {
+    "query_id": "DEMOB-q1",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOB",
+    "as_of": "2025-11-11",
+    "question": "When can this ship?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOB:deadline:current"
+    ]
+  },
+  {
+    "query_id": "DEMOB-q2",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOB",
+    "as_of": "2025-11-11",
+    "question": "Why might this slip?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOB:deadline:current",
+      "synthetic-org-a:DEMOB:blocker:current"
+    ]
+  },
+  {
+    "query_id": "DEMOB-q3",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOB",
+    "as_of": "2025-11-11",
+    "question": "Who should clear this dependency?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOB:owner:current",
+      "synthetic-org-a:DEMOB:blocker:current"
+    ]
+  },
+  {
+    "query_id": "DEMOB-q4",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOB",
+    "as_of": "2025-11-11",
+    "question": "Is this ready?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOB:acceptance:current",
+      "synthetic-org-a:DEMOB:blocker:current"
+    ]
+  },
+  {
+    "query_id": "DEMOB-q5",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOB",
+    "as_of": "2025-11-11",
+    "question": "Do we have bandwidth?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOB:capacity:current"
+    ]
+  },
+  {
+    "query_id": "DEMOC-q1",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOC",
+    "as_of": "2025-11-11",
+    "question": "When can this ship?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOC:deadline:current"
+    ]
+  },
+  {
+    "query_id": "DEMOC-q2",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOC",
+    "as_of": "2025-11-11",
+    "question": "Why might this slip?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOC:deadline:current",
+      "synthetic-org-a:DEMOC:blocker:current"
+    ]
+  },
+  {
+    "query_id": "DEMOC-q3",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOC",
+    "as_of": "2025-11-11",
+    "question": "Who should clear this dependency?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOC:owner:current",
+      "synthetic-org-a:DEMOC:blocker:current"
+    ]
+  },
+  {
+    "query_id": "DEMOC-q4",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOC",
+    "as_of": "2025-11-11",
+    "question": "Is this ready?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOC:acceptance:current",
+      "synthetic-org-a:DEMOC:blocker:current"
+    ]
+  },
+  {
+    "query_id": "DEMOC-q5",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOC",
+    "as_of": "2025-11-11",
+    "question": "Do we have bandwidth?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOC:capacity:current"
+    ]
+  },
+  {
+    "query_id": "DEMOD-q1",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOD",
+    "as_of": "2025-11-11",
+    "question": "When can this ship?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOD:deadline:current"
+    ]
+  },
+  {
+    "query_id": "DEMOD-q2",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOD",
+    "as_of": "2025-11-11",
+    "question": "Why might this slip?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOD:deadline:current",
+      "synthetic-org-a:DEMOD:blocker:current"
+    ]
+  },
+  {
+    "query_id": "DEMOD-q3",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOD",
+    "as_of": "2025-11-11",
+    "question": "Who should clear this dependency?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOD:owner:current",
+      "synthetic-org-a:DEMOD:blocker:current"
+    ]
+  },
+  {
+    "query_id": "DEMOD-q4",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOD",
+    "as_of": "2025-11-11",
+    "question": "Is this ready?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOD:acceptance:current",
+      "synthetic-org-a:DEMOD:blocker:current"
+    ]
+  },
+  {
+    "query_id": "DEMOD-q5",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOD",
+    "as_of": "2025-11-11",
+    "question": "Do we have bandwidth?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOD:capacity:current"
+    ]
+  },
+  {
+    "query_id": "DEMOE-q1",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOE",
+    "as_of": "2025-11-11",
+    "question": "When can this ship?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOE:deadline:current"
+    ]
+  },
+  {
+    "query_id": "DEMOE-q2",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOE",
+    "as_of": "2025-11-11",
+    "question": "Why might this slip?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOE:deadline:current",
+      "synthetic-org-a:DEMOE:blocker:current"
+    ]
+  },
+  {
+    "query_id": "DEMOE-q3",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOE",
+    "as_of": "2025-11-11",
+    "question": "Who should clear this dependency?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOE:owner:current",
+      "synthetic-org-a:DEMOE:blocker:current"
+    ]
+  },
+  {
+    "query_id": "DEMOE-q4",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOE",
+    "as_of": "2025-11-11",
+    "question": "Is this ready?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOE:acceptance:current",
+      "synthetic-org-a:DEMOE:blocker:current"
+    ]
+  },
+  {
+    "query_id": "DEMOE-q5",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOE",
+    "as_of": "2025-11-11",
+    "question": "Do we have bandwidth?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOE:capacity:current"
+    ]
+  },
+  {
+    "query_id": "DEMOF-q1",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOF",
+    "as_of": "2025-11-11",
+    "question": "When can this ship?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOF:deadline:current"
+    ]
+  },
+  {
+    "query_id": "DEMOF-q2",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOF",
+    "as_of": "2025-11-11",
+    "question": "Why might this slip?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOF:deadline:current",
+      "synthetic-org-a:DEMOF:blocker:current"
+    ]
+  },
+  {
+    "query_id": "DEMOF-q3",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOF",
+    "as_of": "2025-11-11",
+    "question": "Who should clear this dependency?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOF:owner:current",
+      "synthetic-org-a:DEMOF:blocker:current"
+    ]
+  },
+  {
+    "query_id": "DEMOF-q4",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOF",
+    "as_of": "2025-11-11",
+    "question": "Is this ready?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOF:acceptance:current",
+      "synthetic-org-a:DEMOF:blocker:current"
+    ]
+  },
+  {
+    "query_id": "DEMOF-q5",
+    "tenant": "synthetic-org-a",
+    "ui_project": "DEMOF",
+    "as_of": "2025-11-11",
+    "question": "Do we have bandwidth?",
+    "gold_ids": [
+      "synthetic-org-a:DEMOF:capacity:current"
+    ]
+  }
+]

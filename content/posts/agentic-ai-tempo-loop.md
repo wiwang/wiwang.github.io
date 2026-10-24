@@ -112,6 +112,8 @@ A top-$K$ document search is not an exhaustive database query. Counting matching
 
 *Figure 1. An illustrative reference design. Context sources are separated by role, and tool results pass through evidence/result validation. The loop is bounded; it does not grant tools new permissions.*
 
+For a deeper treatment of ingestion, hybrid search, evidence selection, and retrieval evaluation, see [RAG for Tempo Loop](/rag-tempo-loop/).
+
 ### Design the retrieval pipeline around provenance
 
 At ingestion, preserve document identity, organization/Jira-instance identity, access-control metadata, source URL, source update time, ingestion time, and version. Chunking should preserve enough parent context to interpret a decision or issue comment; splitting the condition away from the conclusion can produce a misleading snippet.

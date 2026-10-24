@@ -13,6 +13,8 @@ python3 -m venv .venv-articles
 .venv-articles/bin/python scripts/articles/generate_tempo_ranking_figures.py
 # MLOps reference architecture and monitoring-delay simulation:
 .venv-articles/bin/python scripts/articles/generate_mlops_figures.py
+# Tempo Loop RAG architecture and synthetic retrieval study:
+.venv-articles/bin/python scripts/articles/generate_rag_figures.py
 # Tempo Loop agent reference design and conditional schedule forecasts:
 .venv-articles/bin/python scripts/articles/generate_agentic_ai_figures.py
 ```
@@ -42,3 +44,7 @@ The architecture is an illustrative reference design. The monitoring simulation 
 `generate_agentic_ai_figures.py` draws a reference context architecture and a fictional six-task dependency graph, then compares 40,000 paired duration scenarios (seed 20261024). Task durations are independent lognormal draws with log-space standard deviation 0.35 and medians 2, 6, 4, 3, 4, and 1 working days. The API and UI branches run concurrently; no shared-resource, holiday, scope-change, or correlated-delay effects are modeled. The blocker scenario independently adds a uniform 3–8 working-day delay to the API task with probability 0.35. Both scenarios reuse the same primitive duration draws.
 
 Quantiles and deadline probabilities are conditional on chosen illustrative assumptions, not calibrated production forecasts or LLM performance measurements. CSV outputs include the task graph, summary, and every paired simulation result. The generator asserts that the blocker scenario never finishes earlier than the baseline for the same sample. No Tempo data or LLM API calls are used. The article is dated May 6, 2026 and revised October 24, 2026; MLOps is dated October 1, 2024 and revised October 24, 2026.
+
+## Tempo Loop RAG retrieval
+
+`generate_rag_figures.py` creates an illustrative architecture and a deterministic BM25 study over 217 synthetic records. Tenant, permission, and availability/validity filters leave 36 eligible records; 30 templated questions cover six UI-selected projects. It compares retrieval without project scope, scoped retrieval, and scoped retrieval with a manually tailored term dictionary. All methods use identical authorization/time constraints, BM25 statistics, and stable ID tie breaking. The dictionary is designed for these same templates: its perfect coverage is a demonstration, not held-out generalization, dense retrieval performance, or answer quality. Raw corpus, query labels, rankings, and metrics are exported. No Tempo data, embeddings, or LLM calls are used. The article is dated November 11, 2025 and revised October 24, 2026.

@@ -1,0 +1,19 @@
+method,k,mean_required_evidence_recall,complete_evidence_rate
+BM25 without UI scope,1,0.03333333333333333,0.0
+BM25 without UI scope,2,0.08333333333333333,0.06666666666666667
+BM25 without UI scope,3,0.13333333333333333,0.1
+BM25 without UI scope,4,0.2,0.2
+BM25 without UI scope,5,0.21666666666666667,0.2
+BM25 without UI scope,6,0.23333333333333334,0.23333333333333334
+UI-scoped BM25,1,0.2,0.0
+UI-scoped BM25,2,0.5,0.4
+UI-scoped BM25,3,0.7,0.6
+UI-scoped BM25,4,1.0,1.0
+UI-scoped BM25,5,1.0,1.0
+UI-scoped BM25,6,1.0,1.0
+UI scope + term expansion,1,0.7,0.4
+UI scope + term expansion,2,1.0,1.0
+UI scope + term expansion,3,1.0,1.0
+UI scope + term expansion,4,1.0,1.0
+UI scope + term expansion,5,1.0,1.0
+UI scope + term expansion,6,1.0,1.0
