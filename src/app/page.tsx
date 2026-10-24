@@ -88,6 +88,18 @@ export default function Home() {
           <PostCard key={post.slug} post={post} index={i} />
         ))}
       </section>
+      <section className="demo-teaser">
+        <div>
+          <span className="eyebrow">INTERACTIVE DEMO</span>
+          <h2>What were you working on?</h2>
+          <p>
+            Explore how activity context becomes ranked Jira issue suggestions.
+          </p>
+        </div>
+        <Link className="text-link" href="/demo/">
+          Try it yourself →
+        </Link>
+      </section>
       <section className="home-projects">
         <div>
           <span className="eyebrow">BEYOND THE NOTEBOOK</span>

@@ -10,7 +10,7 @@
     "typecheck": "next typegen && tsc --noEmit",
     "validate": "node --import tsx scripts/validate-content.ts",
     "new-post": "node scripts/new-post.mjs",
-    "test": "node --import tsx --test scripts/content.test.ts",
+    "test": "node --import tsx --test scripts/*.test.ts",
     "format": "prettier --write src scripts docs .github *.json *.ts *.mjs README.md",
     "format:check": "prettier --check src scripts docs .github *.json *.ts *.mjs README.md"
   },

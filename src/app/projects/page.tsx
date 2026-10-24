@@ -21,6 +21,18 @@ export default function Projects() {
           learning.
         </p>
       </header>
+      <section className="demo-teaser">
+        <div>
+          <span className="eyebrow">TRY THE INTERACTIVE DEMO</span>
+          <h2>From activity to issue</h2>
+          <p>
+            Adjust activity signals and see how Jira issue suggestions change.
+          </p>
+        </div>
+        <Link className="text-link" href="/demo/">
+          Open the workbench →
+        </Link>
+      </section>
       <div className="project-grid">
         {projects.map((p) => (
           <article className="project-card" key={p.number}>

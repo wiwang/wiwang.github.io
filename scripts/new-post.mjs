@@ -31,6 +31,7 @@ if (
     "sitemap",
     "robots",
     "rss",
+    "demo",
   ].includes(slug)
 ) {
   console.error(

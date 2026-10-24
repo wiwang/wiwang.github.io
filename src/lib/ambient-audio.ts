@@ -21,7 +21,12 @@ export function soundscapeFor(path: string): Soundscape {
       notes: [146.83, 185, 220, 277.18],
       seconds: 1.8,
     };
-  if (path.includes("recomendation") || path.includes("semantic-search-jira"))
+  if (
+    path.includes("recomendation") ||
+    path.includes("semantic-search-jira") ||
+    path === "/demo/" ||
+    path === "/demo"
+  )
     return {
       name: "Connections · interwoven ambient",
       notes: [164.81, 207.65, 246.94, 311.13],

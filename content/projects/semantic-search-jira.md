@@ -78,3 +78,7 @@ An encoder change implies an index change. Query vectors from a new model should
 Useful production checks include query-encoding failures, embedding freshness, candidate counts after filtering, retrieval latency, and changes in accepted or corrected suggestions. User feedback is valuable but biased by what the system already displayed; a click is not automatically a clean relevance label.
 
 This project demonstrates domain-specific representation learning connected to a concrete work-management problem. Its value is the combination of model adaptation, Jira-aware data preparation, and careful evaluation—not semantic similarity in isolation. Read more about [MLOps and feature pipelines](/mlops-production-systems/) or the complementary [retrieval and evaluation project](/projects/agent-retrieval-evaluation/).
+
+## Explore the idea interactively
+
+[Open the issue-ranking workbench](/demo/) to vary synthetic activity signals, project scope, and scoring weights. Inspect how the candidate list and timesheet suggestion change. It is a transparent demonstration, not the trained search model or a production benchmark.

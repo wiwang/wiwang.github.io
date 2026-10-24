@@ -269,3 +269,7 @@ The **Reading sounds** bar below the header offers original generative ambient s
 ## Project case studies
 
 Each project has a dedicated page under `/projects/<slug>/`, linked from the homepage and project index. Descriptions live in `src/lib/site.ts`, detailed Markdown in `content/projects/`, and conceptual flow diagrams in `public/projects/`. These pages separate resume-backed contributions from illustrative technical design discussion and do not publish private customer data or invented benchmark results.
+
+## Interactive ranking demo
+
+`/demo/` is a browser-only issue-ranking workbench linked from the homepage and Projects page. Fictional IDE/calendar context is blended into four hand-authored topic dimensions. Cosine similarity, synthetic history, and exponential recency are combined with normalized adjustable weights. The UI explains contributions, uncertain ties, and manual selection. It does not invoke a trained model, access Jira/Tempo, or send the selected values to a server. Page visits still use the site’s existing analytics. Data and scoring live in `src/lib/ranking-demo.ts`; UI lives in `src/components/ranking-demo.tsx`.
