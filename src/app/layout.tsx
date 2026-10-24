@@ -67,7 +67,7 @@ export default function RootLayout({
             <a href={site.linkedin}>
               LinkedIn <Arrow />
             </a>
-            <a href="/feed.xml">
+            <a href="/rss/">
               RSS <Arrow />
             </a>
           </div>

@@ -41,6 +41,7 @@ const reserved = new Set([
   "_next",
   "sitemap",
   "robots",
+  "rss",
 ]);
 export function parsePost(source: string, filename: string): Post {
   const { data, content } = matter(source);

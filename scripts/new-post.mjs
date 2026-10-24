@@ -30,6 +30,7 @@ if (
     "next",
     "sitemap",
     "robots",
+    "rss",
   ].includes(slug)
 ) {
   console.error(

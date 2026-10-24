@@ -257,3 +257,7 @@ The resume page and project summaries are based on the supplied Agentic AI Engin
 The two original articles have been rewritten as advanced technical guides, with a 2026-10-24 revision date, cited sources, and reproducible synthetic experiments. Figure generation instructions are in `scripts/articles/README.md`. Existing article URLs `/Bias-Variance/` and `/recomendation/` remain canonical, including their original spelling. `/about/` and `/resume/` remain available. `/project/` renders the project page with a canonical link to `/projects/`. `/feed.xml` continues to work, now as RSS. Existing image paths are preserved under `public/images/`.
 
 The old Jekyll source is removed from the active tree; it remains available in Git history. No server redirects are required. Next.js is configured for static export with trailing slashes. Server-dependent Next.js features are deliberately avoided for GitHub Pages compatibility.
+
+## RSS subscriptions
+
+The footer RSS link opens `/rss/`, a readable subscription page with a copyable feed URL and instructions. Feed readers and automatic discovery continue to use `https://wiwang.github.io/feed.xml`. It contains published article titles, summaries, canonical links, dates, and tags; drafts are excluded. A browser may show raw XML or download the feed, which does not subscribe the visitor automatically. Paste the feed URL into an RSS reader.
