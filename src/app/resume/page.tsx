@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { site, projects } from "@/lib/site";
 import { resume } from "@/lib/resume";
@@ -18,7 +19,7 @@ export default function Resume() {
         </h1>
         <p>{resume.role}</p>
         <div className="resume-contact">
-          <a href={`mailto:${site.email}`}>Email ↗</a>
+          <Link href="/contact/">Email ↗</Link>
           <a href={site.linkedin}>LinkedIn ↗</a>
           <a href={site.github}>GitHub ↗</a>
         </div>

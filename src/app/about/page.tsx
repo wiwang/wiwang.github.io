@@ -62,9 +62,9 @@ export default function About() {
           />
           <h2>Let’s connect.</h2>
           <p>Questions, ideas, or a shared interest in machine learning?</p>
-          <a href={`mailto:${site.email}`} className="text-link">
+          <Link href="/contact/" className="text-link">
             Send me an email <Arrow />
-          </a>
+          </Link>
           <div className="aside-socials">
             <a href={site.github}>GitHub ↗</a>
             <a href={site.linkedin}>LinkedIn ↗</a>

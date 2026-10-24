@@ -1,4 +1,9 @@
-export function FeatureArt() {
+export function FeatureArt({
+  kind = "bias-variance",
+}: {
+  kind?: "agent" | "bias-variance";
+}) {
+  if (kind === "agent") return <AgentFeatureArt />;
   return (
     <div className="feature-art" aria-hidden="true">
       <span className="art-label">MODEL COMPLEXITY</span>
@@ -64,6 +69,74 @@ export function FeatureArt() {
           <i />
           Total error
         </span>
+      </div>
+    </div>
+  );
+}
+
+function AgentFeatureArt() {
+  return (
+    <div className="feature-art" aria-hidden="true">
+      <span className="art-label">CONTEXT → EVIDENCE → ANSWERS</span>
+      <svg viewBox="0 0 420 250" fill="none">
+        <g stroke="var(--accent)" strokeOpacity=".4" strokeWidth="1.4">
+          <path d="M105 56C150 56 140 120 172 120M105 124H172M105 192C150 192 140 128 172 128M242 124H286M336 144V183H217V148" />
+          <path d="m166 116 6 4-6 4m114-4 6 4-6 4m-67 26 4-6 4 6" />
+        </g>
+        <g fill="var(--bg)" stroke="var(--line)">
+          <rect x="16" y="36" width="90" height="40" rx="7" />
+          <rect x="16" y="104" width="90" height="40" rx="7" />
+          <rect x="16" y="172" width="90" height="40" rx="7" />
+          <rect x="172" y="96" width="70" height="56" rx="12" />
+          <rect x="286" y="104" width="103" height="40" rx="7" />
+        </g>
+        <rect
+          x="172"
+          y="96"
+          width="70"
+          height="56"
+          rx="12"
+          fill="var(--soft-accent)"
+          stroke="var(--accent)"
+          strokeOpacity=".5"
+        />
+        <g
+          fill="var(--muted)"
+          fontFamily="Arial, sans-serif"
+          fontSize="11"
+          textAnchor="middle"
+        >
+          <text x="61" y="60">
+            PROFILE
+          </text>
+          <text x="61" y="128">
+            UI + HISTORY
+          </text>
+          <text x="61" y="196">
+            RAG
+          </text>
+          <text x="337" y="128">
+            GROUNDED ANSWER
+          </text>
+          <text x="279" y="205" fontSize="9">
+            TOOLS + VALIDATION
+          </text>
+        </g>
+        <text
+          x="207"
+          y="129"
+          fill="var(--accent)"
+          fontFamily="Arial, sans-serif"
+          fontSize="12"
+          textAnchor="middle"
+        >
+          AGENT
+        </text>
+      </svg>
+      <div className="art-legend">
+        <span>Memory</span>
+        <span>Tools</span>
+        <span>Evidence</span>
       </div>
     </div>
   );

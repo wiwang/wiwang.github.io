@@ -6,7 +6,7 @@ updated: "2026-10-24"
 slug: agentic-ai-tempo-loop
 tags: ["agentic-ai", "rag", "context-engineering", "mlops"]
 draft: false
-featured: false
+featured: true
 ---
 
 “Is this project at risk?” looks like a short question. In a work-management product, it is an underspecified query over identity, project state, dependencies, time, and intent.

@@ -36,8 +36,7 @@ export default function Projects() {
         ))}
       </div>
       <aside className="info-note">
-        Interested in the work?{" "}
-        <a href="mailto:william.calix.cn@gmail.com">Get in touch →</a>
+        Interested in the work? <a href="/contact/">Get in touch →</a>
       </aside>
     </div>
   );

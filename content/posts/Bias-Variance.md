@@ -6,7 +6,7 @@ updated: "2026-10-24"
 slug: Bias-Variance
 tags: ["machine-learning", "fundamentals", "generalization"]
 draft: false
-featured: true
+featured: false
 ---
 
 A model can fit its training data almost perfectly and still make unreliable predictions. Another can be impressively stable yet consistently miss the structure of the problem. Bias and variance give us a language for separating those failures, but only if we define them carefully.

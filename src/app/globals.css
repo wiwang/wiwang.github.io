@@ -1644,3 +1644,67 @@ button {
     scrollbar-width: thin;
   }
 }
+.email-contact-card {
+  padding: 30px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.email-address-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 14px;
+}
+.email-address-row input {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--bg);
+  padding: 12px;
+  color: var(--text);
+  font-size: 15px;
+}
+.email-address-row button {
+  flex-shrink: 0;
+  border: 0;
+}
+.email-copy-status {
+  color: var(--muted);
+  font-size: 12px;
+  min-height: 22px;
+  margin: 12px 0 24px;
+}
+.email-options {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.email-option-note {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+  margin-top: 20px;
+}
+.contact-profile-links {
+  display: flex;
+  gap: 24px;
+  margin-top: 24px;
+}
+@media (max-width: 640px) {
+  .email-contact-card {
+    padding: 20px;
+  }
+  .email-address-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .email-address-row button {
+    justify-content: center;
+  }
+  .email-address-row input {
+    font-size: 14px;
+  }
+}

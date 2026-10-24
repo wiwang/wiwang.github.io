@@ -108,9 +108,7 @@ export default async function Article({
           {content}
           <div className="article-end">
             <span>Thanks for reading.</span>
-            <a
-              href={`mailto:${site.email}?subject=${encodeURIComponent(post.title)}`}
-            >
+            <a href={`/contact/?subject=${encodeURIComponent(post.title)}`}>
               Discuss this article ↗
             </a>
           </div>
@@ -130,7 +128,7 @@ export default async function Article({
               ))}
             </nav>
             <p>A question or a different perspective?</p>
-            <a className="text-link" href={`mailto:${site.email}`}>
+            <a className="text-link" href="/contact/">
               Let’s talk ↗
             </a>
           </div>

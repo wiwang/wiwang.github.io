@@ -21,6 +21,7 @@ if (
     "projects",
     "project",
     "about",
+    "contact",
     "resume",
     "feed",
     "404",

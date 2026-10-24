@@ -32,6 +32,7 @@ const reserved = new Set([
   "projects",
   "project",
   "about",
+  "contact",
   "resume",
   "feed",
   "404",

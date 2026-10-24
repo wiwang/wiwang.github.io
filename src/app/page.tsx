@@ -64,7 +64,11 @@ export default function Home() {
                 </span>
               </span>
             </div>
-            <FeatureArt />
+            <FeatureArt
+              kind={
+                featured.tags.includes("agentic-ai") ? "agent" : "bias-variance"
+              }
+            />
           </Link>
         </section>
       )}
@@ -105,9 +109,9 @@ export default function Home() {
       </section>
       <section className="contact-strip">
         <span>Have an idea or a question?</span>
-        <a className="text-link" href="mailto:william.calix.cn@gmail.com">
+        <Link className="text-link" href="/contact/">
           Let’s connect <Arrow />
-        </a>
+        </Link>
       </section>
     </div>
   );
