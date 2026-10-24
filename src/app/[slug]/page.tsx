@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getPosts } from "@/lib/posts";
 import { formatDate } from "@/lib/date";
 import { renderPost } from "@/lib/render-post";
+import { VisitCount } from "@/components/visit-count";
 import { PostCard } from "@/components/post-card";
 import { site } from "@/lib/site";
 const includeDrafts = process.env.NODE_ENV === "development";
@@ -98,6 +99,12 @@ export default async function Article({
               <time dateTime={post.date}>{formatDate(post.date)}</time>
               <span>·</span>
               <span>{post.readingTime} min read</span>
+              {!post.draft && (
+                <>
+                  <span>·</span>
+                  <VisitCount path={`/${post.slug}/`} />
+                </>
+              )}
               {post.updated && <span>Updated {formatDate(post.updated)}</span>}
             </div>
           </div>

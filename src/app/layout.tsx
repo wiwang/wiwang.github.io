@@ -3,6 +3,7 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 import { Arrow } from "@/components/icons";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { VisitCount } from "@/components/visit-count";
 import { Analytics } from "@/components/analytics";
 import { Nav } from "@/components/nav";
 import "./globals.css";
@@ -70,7 +71,11 @@ export default function RootLayout({
               RSS <Arrow />
             </a>
           </div>
-          <p className="copyright">© {new Date().getFullYear()} Zhiyong Wang</p>
+          <p className="copyright">
+            © {new Date().getFullYear()} Zhiyong Wang
+            <br />
+            <VisitCount path="TOTAL" />
+          </p>
         </footer>
       </body>
     </html>
