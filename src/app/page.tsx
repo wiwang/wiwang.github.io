@@ -99,7 +99,7 @@ export default function Home() {
         </div>
         <div className="project-mini-list">
           {projects.map((p) => (
-            <Link href="/projects/" key={p.number}>
+            <Link href={`/projects/${p.slug}/`} key={p.number}>
               <span>{p.number}</span>
               <h3>{p.title}</h3>
               <Arrow />

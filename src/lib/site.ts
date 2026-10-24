@@ -10,6 +10,12 @@ export const site = {
 export const projects = [
   {
     number: "01",
+    slug: "agentic-ai-platform",
+    focus:
+      "Agent orchestration, structured data access, and production operations",
+    stack: ["MCP", "Snowflake", "Amazon EKS", "Persistent memory"],
+    delivered:
+      "MCP clients and servers, multi-tool agents, and containerized deployment with autoscaling and observability.",
     title: "Agentic AI platform",
     category: "MCP & agent orchestration",
     description:
@@ -17,6 +23,11 @@ export const projects = [
   },
   {
     number: "02",
+    slug: "agent-retrieval-evaluation",
+    focus: "Evidence grounding and evaluation across the agent execution",
+    stack: ["OpenSearch", "RAG", "LLM-as-a-Judge", "Trace analysis"],
+    delivered:
+      "A document ingestion and retrieval pipeline, plus an automated harness checking tools, queries, grounding, and completion.",
     title: "Agent retrieval & evaluation",
     category: "RAG & evaluation",
     description:
@@ -24,6 +35,16 @@ export const projects = [
   },
   {
     number: "03",
+    slug: "semantic-search-jira",
+    focus: "Domain-adapted semantic similarity for Jira ticket search",
+    stack: [
+      "Sentence Transformers",
+      "Bi-encoder",
+      "Jira",
+      "Retrieval evaluation",
+    ],
+    delivered:
+      "A fine-tuned Jira search encoder with a resume-reported 5.3% improvement over the baseline NLU-based search.",
     title: "Semantic search for Jira",
     category: "Representation learning",
     description:

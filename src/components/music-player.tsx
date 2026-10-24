@@ -16,6 +16,22 @@ export function MusicPlayer() {
     engine.current?.setMood(soundscapeFor(pathname ?? "/"));
   }, [pathname]);
   useEffect(() => {
+    let mounted = true;
+    try {
+      if (localStorage.getItem("reading-music") !== "off") {
+        const audio = new AmbientAudio(soundscapeFor(location.pathname), 0.3);
+        engine.current = audio;
+        // Browsers may suspend this attempt until the visitor presses Play.
+        void audio
+          .play()
+          .then(() => {
+            if (mounted && !document.hidden) setPlaying(true);
+          })
+          .catch(() => {});
+      }
+    } catch {
+      // Storage or audio may be unavailable; the Play control remains usable.
+    }
     const hide = () => {
       if (document.hidden) {
         void engine.current?.pause().catch(() => {});
@@ -24,6 +40,7 @@ export function MusicPlayer() {
     };
     document.addEventListener("visibilitychange", hide);
     return () => {
+      mounted = false;
       document.removeEventListener("visibilitychange", hide);
       engine.current?.destroy();
       engine.current = null;
@@ -36,6 +53,9 @@ export function MusicPlayer() {
       if (playing) await engine.current.pause();
       else await engine.current.play();
       setPlaying(!playing);
+      try {
+        localStorage.setItem("reading-music", playing ? "off" : "on");
+      } catch {}
       setError("");
     } catch {
       setError("Audio is unavailable in this browser.");

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { projects } from "@/lib/site";
 export const metadata: Metadata = {
@@ -30,8 +31,16 @@ export default function Projects() {
             <div className="project-glyph" aria-hidden="true">
               {p.number === "01" ? "↔" : p.number === "02" ? "⋈" : "∿"}
             </div>
-            <h2>{p.title}</h2>
+            <h2>
+              <Link href={`/projects/${p.slug}/`}>{p.title}</Link>
+            </h2>
             <p>{p.description}</p>
+            <Link
+              className="text-link project-detail-link"
+              href={`/projects/${p.slug}/`}
+            >
+              Explore the project →
+            </Link>
           </article>
         ))}
       </div>

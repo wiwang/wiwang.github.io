@@ -1,6 +1,9 @@
 export type Soundscape = { name: string; notes: number[]; seconds: number };
 export function soundscapeFor(path: string): Soundscape {
-  if (path.includes("rag-tempo-loop"))
+  if (
+    path.includes("rag-tempo-loop") ||
+    path.includes("agent-retrieval-evaluation")
+  )
     return {
       name: "Evidence · layered ambient",
       notes: [196, 246.94, 293.66, 369.99],
@@ -18,7 +21,7 @@ export function soundscapeFor(path: string): Soundscape {
       notes: [146.83, 185, 220, 277.18],
       seconds: 1.8,
     };
-  if (path.includes("recomendation"))
+  if (path.includes("recomendation") || path.includes("semantic-search-jira"))
     return {
       name: "Connections · interwoven ambient",
       notes: [164.81, 207.65, 246.94, 311.13],
