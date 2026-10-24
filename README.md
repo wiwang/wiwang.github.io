@@ -262,10 +262,6 @@ The old Jekyll source is removed from the active tree; it remains available in G
 
 The footer RSS link opens `/rss/`, a readable subscription page with a copyable feed URL and instructions. Feed readers and automatic discovery continue to use `https://wiwang.github.io/feed.xml`. It contains published article titles, summaries, canonical links, dates, and tags; drafts are excluded. A browser may show raw XML or download the feed, which does not subscribe the visitor automatically. Paste the feed URL into an RSS reader.
 
-## Optional background music
-
-The **Reading sounds** bar below the header offers original generative ambient soundscapes. Playback is attempted on arrival; browsers that block audible autoplay require Play. Visitors can pause or adjust the volume, and hear a topic-specific palette on each technical article. Playback continues through client-side page navigation; changing topics updates the notes for subsequent phrases. It pauses when the tab is hidden, and an explicit Pause preference is remembered on subsequent visits. No audio is downloaded or streamed. `src/lib/ambient-audio.ts` defines the soundscapes and synthesizes sine tones with soft envelopes using Web Audio; `src/components/music-player.tsx` provides accessible controls. New articles use the default Focus palette until a route mapping is added.
-
 ## Project case studies
 
 Each project has a dedicated page under `/projects/<slug>/`, linked from the homepage and project index. Descriptions live in `src/lib/site.ts`, detailed Markdown in `content/projects/`, and conceptual flow diagrams in `public/projects/`. These pages separate resume-backed contributions from illustrative technical design discussion and do not publish private customer data or invented benchmark results.
