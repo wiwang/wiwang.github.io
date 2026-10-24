@@ -3,6 +3,7 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 import { Arrow } from "@/components/icons";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Analytics } from "@/components/analytics";
 import { Nav } from "@/components/nav";
 import "./globals.css";
 import "katex/dist/katex.min.css";
@@ -31,6 +32,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
+        <Analytics />
         <a className="skip-link" href="#main">
           Skip to content
         </a>

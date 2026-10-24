@@ -231,6 +231,14 @@ The build validates all post metadata, exports to `out/`, and checks internal li
 
 There are no runtime services, database, CMS credentials, or paid hosting requirements. Deployment needs GitHub Pages enabled and the workflow’s Pages permissions allowed by repository settings.
 
+## Visit analytics
+
+Visits are collected by [GoatCounter](https://www.goatcounter.com/) using the public endpoint `https://wiwang.goatcounter.com/count`. Sign in at [the analytics dashboard](https://wiwang.goatcounter.com/) to see site-wide trends and visits for each article URL. New posts are tracked automatically; no frontmatter changes are needed. The dashboard remains private; this integration does not display public counters.
+
+`src/components/analytics.tsx` loads the tracker only on `wiwang.github.io`. It records initial page loads and Next.js client-side route changes, including back/forward navigation. Local development and local production previews do not send visits. Query strings and URL fragments are excluded from tracked paths, and anchor clicks do not add visits. A failed or blocked analytics script does not prevent reading the site.
+
+With **Sessions** enabled in GoatCounter, repeated visits to the same path are deduplicated within its session window. These counts are estimates, not a count of distinct people across all time; blockers and disabled JavaScript can prevent collection. Collection starts with this deployment and cannot reconstruct earlier traffic. To exclude your own browser, use GoatCounter **Settings → Tracking → disable for this browser**. See [sessions and visitors](https://www.goatcounter.com/help/sessions) for counting details. No account password or API token is stored in this repository.
+
 ## Customize
 
 - Identity, links, project summaries: `src/lib/site.ts`
