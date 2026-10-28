@@ -1,7 +1,8 @@
 ---
 title: "Evaluating Tempo Loop Agents: From Research Papers to Release Gates"
 description: "Turn agent-evaluation research into executable task contracts, stateful MCP tests, calibrated judges, repeated-run reliability, and cost-aware release decisions for Tempo Loop."
-date: "2026-10-28"
+date: "2026-06-04"
+updated: "2026-10-28"
 slug: tempo-loop-agent-evals
 tags: ["agentic-ai", "evaluation", "rag", "mlops"]
 draft: false
@@ -368,3 +369,5 @@ The strongest evaluation stack combines these ideas. Deterministic checks establ
 - Luo et al., [MCP-Universe](https://arxiv.org/abs/2508.14704), 2025.
 
 The original generator is [scripts/articles/generate_loop_evals.py](https://github.com/wiwang/wiwang.github.io/blob/master/scripts/articles/generate_loop_evals.py). It exports the two figures, exact calculation tables, eight constructed traces, grader results, and a standalone copy of the grader. The scientific plotting dependencies are pinned in [the experiment instructions](https://github.com/wiwang/wiwang.github.io/blob/master/scripts/articles/README.md). No model or judge API is called, and no Tempo data is used.
+
+_Written June 4, 2026; revised October 28, 2026. References and downloadable examples reflect the current revision._
