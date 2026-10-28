@@ -1,8 +1,8 @@
 ---
-title: "Building a Context-Aware AI Agent for Tempo Loop"
-description: "Design an agent that combines user profile, activity history, interaction memory, the current Loop view, and RAG to summarize work, analyze risk, prioritize tasks, and explain forecasts."
+title: "Agentic Loop Agent: Building a Context-Aware AI Assistant"
+description: "Design an agent that combines user profile, activity history, interaction memory, the current application view, and RAG to summarize work, analyze risk, prioritize tasks, and explain forecasts."
 date: "2026-05-06"
-updated: "2026-10-24"
+updated: "2026-10-28"
 slug: agentic-ai-tempo-loop
 tags: ["agentic-ai", "rag", "context-engineering", "mlops"]
 draft: false
@@ -11,9 +11,9 @@ featured: true
 
 “Is this project at risk?” looks like a short question. In a work-management product, it is an underspecified query over identity, project state, dependencies, time, and intent.
 
-Which project does “this” mean? Does the user mean the selection in the current Tempo Loop view, a project discussed yesterday, or the entire organization? Is the displayed work current? Does an apparently overdue task actually block delivery? What can the user access? A fluent answer is easy to generate; a dependable answer requires resolving those questions first.
+Which project does “this” mean? Does the user mean the selection in the current application view, a project discussed yesterday, or the entire organization? Is the displayed work current? Does an apparently overdue task actually block delivery? What can the user access? A fluent answer is easy to generate; a dependable answer requires resolving those questions first.
 
-This article explores an AI agent for **Tempo Loop** that answers questions using the user's profile, historical activities, past interactions, the current UI view, and retrieval-augmented generation. At Tempo, my work included MCP clients and servers, agents with persistent memory, OpenSearch-based RAG, and automated agent evaluation. The architecture, tool contracts, fictional project, and simulation below are illustrative designs grounded in that work—not a disclosure of Tempo's private implementation or customer data.
+This article introduces the **Agentic Loop Agent**, an independent reference design for a work-management assistant that answers questions using the user's profile, historical activities, past interactions, the current UI view, and retrieval-augmented generation. It draws on my engineering experience with MCP clients and servers, agents with persistent memory, OpenSearch-based RAG, and automated agent evaluation. The architecture, tool contracts, fictional project, and simulation are illustrative; they do not reproduce a former employer's private implementation or use customer data.
 
 The central design principle is simple: **use the language model to coordinate and explain; make scope, evidence, permissions, and numerical assumptions explicit.**
 
@@ -21,13 +21,13 @@ The central design principle is simple: **use the language model to coordinate a
 
 Different requests need different evidence and computations:
 
-| User question | Evidence needed | Analysis path | Important limit |
-| --- | --- | --- | --- |
-| “Summarize my work this week.” | Authorized activity and issue history, time range, timezone | Aggregate events and linked work; summarize with coverage notes | Activity logs are incomplete proxies for work |
-| “Is this project at risk?” | Current issue state, dependencies, milestones, blockers, relevant decisions | Separate observed risks from inferred schedule consequences | Missing dependency data can hide risk |
-| “What should I prioritize next?” | Current assignments, explicit priorities, dependencies, available capacity, user intent | Explain trade-offs and propose an ordered list | A priority score is not an objective truth |
-| “Warn me about tasks that need attention.” | Due dates, status transitions, blocked state, freshness, alert history | Apply rules plus bounded interpretation; deduplicate alerts | Repeated uncertain warnings can be worse than silence |
-| “When will this project finish?” | Remaining-work estimates, dependency graph, capacity and calendar assumptions | Run a forecasting tool; explain conditional ranges | An LLM's verbal confidence is not a calibrated forecast |
+| User question                              | Evidence needed                                                                         | Analysis path                                                   | Important limit                                         |
+| ------------------------------------------ | --------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------------------------- |
+| “Summarize my work this week.”             | Authorized activity and issue history, time range, timezone                             | Aggregate events and linked work; summarize with coverage notes | Activity logs are incomplete proxies for work           |
+| “Is this project at risk?”                 | Current issue state, dependencies, milestones, blockers, relevant decisions             | Separate observed risks from inferred schedule consequences     | Missing dependency data can hide risk                   |
+| “What should I prioritize next?”           | Current assignments, explicit priorities, dependencies, available capacity, user intent | Explain trade-offs and propose an ordered list                  | A priority score is not an objective truth              |
+| “Warn me about tasks that need attention.” | Due dates, status transitions, blocked state, freshness, alert history                  | Apply rules plus bounded interpretation; deduplicate alerts     | Repeated uncertain warnings can be worse than silence   |
+| “When will this project finish?”           | Remaining-work estimates, dependency graph, capacity and calendar assumptions           | Run a forecasting tool; explain conditional ranges              | An LLM's verbal confidence is not a calibrated forecast |
 
 These are answer and analysis tasks. Changing a Jira issue, rearranging someone's work, or sending a warning to colleagues is a separate action with its own authorization path. Asking for a risk assessment does not authorize changing the project.
 
@@ -37,14 +37,14 @@ These are answer and analysis tasks. Changing a Jira issue, rearranging someone'
 
 An agent's context should not be an undifferentiated transcript. Each source answers a different question and has different authority.
 
-| Context source | Useful information | Scope and lifetime | What it must not become |
-| --- | --- | --- | --- |
-| User profile | Timezone, role, explicit preferences, relevant work context | User-scoped; refreshable | A substitute for server-side permissions |
-| Historical activities | Jira interactions, calendar/IDE signals, confirmed work associations | Organization, user, event time and availability time | A claim about productivity or intent without evidence |
-| Past interactions | Conversation references, confirmed preferences, earlier decisions | Thread or explicit cross-thread memory | Automatically true project state |
-| Current Loop view | Selected project/issues, date range, filters, view revision | Request-scoped snapshot | An implicit grant of access |
-| RAG evidence | Project decisions, documentation, descriptions and relevant discussion | Source-scoped, permission-filtered, versioned | Instructions that override application policy |
-| Live tools | Current counts, issue state, dependency information and calculations | Tool-scoped; timestamped | Unbounded authority to query or mutate systems |
+| Context source           | Useful information                                                     | Scope and lifetime                                   | What it must not become                               |
+| ------------------------ | ---------------------------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------- |
+| User profile             | Timezone, role, explicit preferences, relevant work context            | User-scoped; refreshable                             | A substitute for server-side permissions              |
+| Historical activities    | Jira interactions, calendar/IDE signals, confirmed work associations   | Organization, user, event time and availability time | A claim about productivity or intent without evidence |
+| Past interactions        | Conversation references, confirmed preferences, earlier decisions      | Thread or explicit cross-thread memory               | Automatically true project state                      |
+| Current application view | Selected project/issues, date range, filters, view revision            | Request-scoped snapshot                              | An implicit grant of access                           |
+| RAG evidence             | Project decisions, documentation, descriptions and relevant discussion | Source-scoped, permission-filtered, versioned        | Instructions that override application policy         |
+| Live tools               | Current counts, issue state, dependency information and calculations   | Tool-scoped; timestamped                             | Unbounded authority to query or mutate systems        |
 
 A typed context envelope makes ambiguity inspectable:
 
@@ -56,16 +56,16 @@ A typed context envelope makes ambiguity inspectable:
     "revision": 17,
     "selected_project_id": "example-project",
     "date_range": ["2026-05-01", "2026-05-06"],
-    "filters": {"assignee": "current_user"},
+    "filters": { "assignee": "current_user" },
     "captured_at": "2026-05-06T16:00:00Z"
   },
-  "preferences": {"timezone": "America/Vancouver"},
+  "preferences": { "timezone": "America/Vancouver" },
   "evidence_refs": [],
-  "analysis_limits": {"max_tool_calls": 8, "deadline_ms": 12000}
+  "analysis_limits": { "max_tool_calls": 8, "deadline_ms": 12000 }
 }
 ```
 
-These fields are an illustrative contract, not a Tempo API. The server supplies authenticated identity and authorization independently. Client-provided organization IDs, view selections, and tool arguments are claims to validate, not credentials.
+These fields are an illustrative contract, not a production API. The server supplies authenticated identity and authorization independently. Client-provided organization IDs, view selections, and tool arguments are claims to validate, not credentials.
 
 ### Resolve “this” before retrieval
 
@@ -110,9 +110,9 @@ A top-$K$ document search is not an exhaustive database query. Counting matching
 
 [![A context-aware agent architecture combines the current UI snapshot, profile and interaction memory, live tools and RAG, bounded planning, validation, and a scoped answer.](/posts/agentic-ai-tempo-loop/agent-context-architecture.svg)](/posts/agentic-ai-tempo-loop/agent-context-architecture.svg)
 
-*Figure 1. An illustrative reference design. Context sources are separated by role, and tool results pass through evidence/result validation. The loop is bounded; it does not grant tools new permissions.*
+_Figure 1. An illustrative reference design. Context sources are separated by role, and tool results pass through evidence/result validation. The loop is bounded; it does not grant tools new permissions._
 
-For a deeper treatment of ingestion, hybrid search, evidence selection, and retrieval evaluation, see [RAG for Tempo Loop](/rag-tempo-loop/).
+For a deeper treatment of ingestion, hybrid search, evidence selection, and retrieval evaluation, see [RAG for the Agentic Loop Agent](/rag-tempo-loop/).
 
 ### Design the retrieval pipeline around provenance
 
@@ -185,13 +185,13 @@ A fixed workflow is enough for many requests: resolve scope, query the known dat
 
 For a project-risk question, the agent might discover that an apparently overdue issue is not on the release path and then inspect a different dependency. That is a legitimate adaptive step. Unlimited browsing through every issue is not a sound default.
 
-| Illustrative tool | Contract | Important restriction |
-| --- | --- | --- |
-| `get_project_snapshot` | Versioned issue/dependency state with coverage and retrieval time | Server-enforced project and issue permissions |
-| `get_activity_summary` | Aggregates for a specified user/time range with missing-source coverage | Bounded queries and no unsupported productivity inference |
-| `retrieve_project_evidence` | Passages with source/version/access metadata | Retrieved text is untrusted content |
-| `compute_project_forecast` | Scenario quantiles, assumptions, model version and input snapshot | No invented estimates for missing inputs |
-| `rank_attention_items` | Ordered recommendations with factor contributions | Explanatory policy, not automatic reassignment |
+| Illustrative tool           | Contract                                                                | Important restriction                                     |
+| --------------------------- | ----------------------------------------------------------------------- | --------------------------------------------------------- |
+| `get_project_snapshot`      | Versioned issue/dependency state with coverage and retrieval time       | Server-enforced project and issue permissions             |
+| `get_activity_summary`      | Aggregates for a specified user/time range with missing-source coverage | Bounded queries and no unsupported productivity inference |
+| `retrieve_project_evidence` | Passages with source/version/access metadata                            | Retrieved text is untrusted content                       |
+| `compute_project_forecast`  | Scenario quantiles, assumptions, model version and input snapshot       | No invented estimates for missing inputs                  |
+| `rank_attention_items`      | Ordered recommendations with factor contributions                       | Explanatory policy, not automatic reassignment            |
 
 Tool responses should distinguish complete results from pagination, partial failures, and stale snapshots. An empty response is not proof that no blockers exist if the query failed or only some integrations were covered.
 
@@ -234,12 +234,12 @@ A risk analysis should identify the observed condition, its dependency consequen
 
 An illustrative evidence ledger might be:
 
-| Claim | Type | Evidence or calculation | Qualification |
-| --- | --- | --- | --- |
-| “API work remains blocked.” | Observed fact | Current issue snapshot and linked blocker record | State as of the snapshot time |
-| “Integration cannot start until the API and UI branches finish.” | Dependency fact | Validated dependency edges | Unknown edges may change the analysis |
-| “The deadline is less likely under the blocker scenario.” | Conditional inference | Forecast tool using explicit blocker assumptions | Not a measured probability from Tempo production |
-| “Resolve the blocker before expanding scope.” | Recommendation | Dependency impact and stated delivery objective | A human may know constraints the agent lacks |
+| Claim                                                            | Type                  | Evidence or calculation                          | Qualification                                |
+| ---------------------------------------------------------------- | --------------------- | ------------------------------------------------ | -------------------------------------------- |
+| “API work remains blocked.”                                      | Observed fact         | Current issue snapshot and linked blocker record | State as of the snapshot time                |
+| “Integration cannot start until the API and UI branches finish.” | Dependency fact       | Validated dependency edges                       | Unknown edges may change the analysis        |
+| “The deadline is less likely under the blocker scenario.”        | Conditional inference | Forecast tool using explicit blocker assumptions | Not a measured production probability        |
+| “Resolve the blocker before expanding scope.”                    | Recommendation        | Dependency impact and stated delivery objective  | A human may know constraints the agent lacks |
 
 This structure makes a risk analysis auditable. A single unexplained “risk score: 87” does not.
 
@@ -274,20 +274,20 @@ where the maximum over an empty predecessor set is zero. This is an earliest-fin
 
 ### A fictional six-issue example
 
-| Issue | Remaining work | Predecessors | Assumed median duration |
-| --- | --- | --- | --- |
-| DEMO-201 | Scope confirmation | None | 2 working days |
-| DEMO-202 | API implementation | DEMO-201 | 6 working days |
-| DEMO-203 | UI implementation | DEMO-201 | 4 working days |
-| DEMO-204 | Integration | DEMO-202 and DEMO-203 | 3 working days |
-| DEMO-205 | Validation | DEMO-204 | 4 working days |
-| DEMO-206 | Release preparation | DEMO-205 | 1 working day |
+| Issue    | Remaining work      | Predecessors          | Assumed median duration |
+| -------- | ------------------- | --------------------- | ----------------------- |
+| DEMO-201 | Scope confirmation  | None                  | 2 working days          |
+| DEMO-202 | API implementation  | DEMO-201              | 6 working days          |
+| DEMO-203 | UI implementation   | DEMO-201              | 4 working days          |
+| DEMO-204 | Integration         | DEMO-202 and DEMO-203 | 3 working days          |
+| DEMO-205 | Validation          | DEMO-204              | 4 working days          |
+| DEMO-206 | Release preparation | DEMO-205              | 1 working day           |
 
 These are invented remaining-work assumptions, not estimates for real Jira tickets. The medians are elapsed working durations at the task level under the scenario's capacity assumptions, not person-days that can be added indiscriminately.
 
 [![A fictional dependency graph shows scope confirmation branching into API and UI work before integration, validation, and release preparation.](/posts/agentic-ai-tempo-loop/project-dependencies.svg)](/posts/agentic-ai-tempo-loop/project-dependencies.svg)
 
-*Figure 2. The API and UI branches can run concurrently only because this example assumes no constrained shared resources. Real assignments and calendars can invalidate that assumption.*
+_Figure 2. The API and UI branches can run concurrently only because this example assumes no constrained shared resources. Real assignments and calendars can invalidate that assumption._
 
 For each task, draw an independent duration
 
@@ -304,18 +304,18 @@ The scenarios share the same underlying duration draws so that the difference is
 
 <!-- AGENT_FORECAST_START -->
 
-| Scenario | P50 workdays | P80 workdays | P95 workdays | Finish by day 20 |
-| --- | --- | --- | --- | --- |
-| Baseline | 17.0 | 19.7 | 22.7 | 82.6% |
-| Unresolved API blocker | 18.6 | 22.5 | 26.4 | 62.2% |
+| Scenario               | P50 workdays | P80 workdays | P95 workdays | Finish by day 20 |
+| ---------------------- | ------------ | ------------ | ------------ | ---------------- |
+| Baseline               | 17.0         | 19.7         | 22.7         | 82.6%            |
+| Unresolved API blocker | 18.6         | 22.5         | 26.4         | 62.2%            |
 
 <!-- AGENT_FORECAST_END -->
 
-*Quantiles and deadline probabilities are conditional simulation outputs. P80 means 80% of samples finish by that duration under the assumed model; it does not establish 80% empirical coverage on real projects.*
+_Quantiles and deadline probabilities are conditional simulation outputs. P80 means 80% of samples finish by that duration under the assumed model; it does not establish 80% empirical coverage on real projects._
 
 [![Cumulative completion distributions compare baseline work with an unresolved API blocker, alongside a hypothetical deadline at working day 20.](/posts/agentic-ai-tempo-loop/completion-scenarios.svg)](/posts/agentic-ai-tempo-loop/completion-scenarios.svg)
 
-*Figure 3. The blocker changes the distribution's upper tail and the chance of meeting the illustrative deadline. This is a scheduling simulation, not a benchmark of an LLM's predictive accuracy.*
+_Figure 3. The blocker changes the distribution's upper tail and the chance of meeting the illustrative deadline. This is a scheduling simulation, not a benchmark of an LLM's predictive accuracy._
 
 An agent could explain the result as: “Under the supplied duration and blocker assumptions, the forecast tool estimates these completion ranges. The API dependency is the main changed assumption. I cannot convert this to a reliable calendar commitment without validated capacity, calendar, and scope information.”
 
@@ -335,16 +335,16 @@ Its simulation standard error is approximately $\sqrt{\hat p(1-\hat p)/M}$ for i
 
 An appealing response can still refer to the wrong project, count a partial result as complete, or turn a stale memory into a fact. Build an evaluation set around those failure modes.
 
-| Layer | Evaluation question | Example test |
-| --- | --- | --- |
-| Scope resolution | Did the agent identify the requested project, user and period? | The UI shows one project but the user explicitly names another |
-| Authorization | Was every retrieved item and tool result permitted? | An indexed document is revoked after ingestion |
-| Retrieval | Were required decision records and supporting passages found? | The latest approved scope conflicts with an older summary |
-| Tool execution | Were calls valid, bounded, and correctly interpreted? | A query returns a continuation token or partial failure |
-| Grounding | Does each factual claim follow from its cited evidence? | A source mentions a risk but does not say it is a current blocker |
-| Numerical analysis | Do counts, priorities, dependency calculations and quantiles match tool outputs? | Compare the reported forecast with the immutable result artifact |
-| Memory | Are scope, provenance, expiry and corrections respected? | A user corrects an earlier preference or project assumption |
-| Outcome usefulness | Did the answer help the user complete the task? | Assess correction burden and accepted next steps under a defined study |
+| Layer              | Evaluation question                                                              | Example test                                                           |
+| ------------------ | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Scope resolution   | Did the agent identify the requested project, user and period?                   | The UI shows one project but the user explicitly names another         |
+| Authorization      | Was every retrieved item and tool result permitted?                              | An indexed document is revoked after ingestion                         |
+| Retrieval          | Were required decision records and supporting passages found?                    | The latest approved scope conflicts with an older summary              |
+| Tool execution     | Were calls valid, bounded, and correctly interpreted?                            | A query returns a continuation token or partial failure                |
+| Grounding          | Does each factual claim follow from its cited evidence?                          | A source mentions a risk but does not say it is a current blocker      |
+| Numerical analysis | Do counts, priorities, dependency calculations and quantiles match tool outputs? | Compare the reported forecast with the immutable result artifact       |
+| Memory             | Are scope, provenance, expiry and corrections respected?                         | A user corrects an earlier preference or project assumption            |
+| Outcome usefulness | Did the answer help the user complete the task?                                  | Assess correction burden and accepted next steps under a defined study |
 
 Use deterministic assertions for scope IDs, timestamps, permissions, arithmetic, and tool schemas. Use expert review or a rubric-based model judge for completeness and supported interpretation. A judge's score is not ground truth; test its agreement with human reviews and inspect systematic disagreements.
 
@@ -364,7 +364,7 @@ Do not allow a retrieved URL to trigger unrestricted network access. Apply the a
 
 A read-oriented assistant should degrade gracefully: answer the supported part, expose the missing evidence, or ask for clarification. It should not use missing context as a reason to acquire broader access.
 
-## What makes the agent useful in Tempo Loop
+## What makes the Agentic Loop Agent useful
 
 The strongest experience is not simply a chat window beside a dashboard. It is a coherent bridge between the selected view, the user's current question, authorized project state, remembered preferences, and source-backed knowledge.
 
@@ -374,7 +374,7 @@ That is the engineering work behind a context-aware agent: turning a short quest
 
 ## Reproduce the figures
 
-The [figure and simulation generator](https://github.com/wiwang/wiwang.github.io/blob/master/scripts/articles/generate_agentic_ai_figures.py) uses seed 20261024. It draws 40,000 duration scenarios, writes the figures, and synchronizes the result table in this article. No LLM API calls or real Tempo data are involved.
+The [figure and simulation generator](https://github.com/wiwang/wiwang.github.io/blob/master/scripts/articles/generate_agentic_ai_figures.py) uses seed 20261024. It draws 40,000 duration scenarios, writes the figures, and synchronizes the result table in this article. No LLM API calls or real customer data are involved.
 
 Download the [fictional task graph](/posts/agentic-ai-tempo-loop/synthetic-project-tasks.csv), [forecast summary](/posts/agentic-ai-tempo-loop/forecast-summary.csv), or [paired scenario samples](/posts/agentic-ai-tempo-loop/forecast-samples.csv).
 
@@ -395,4 +395,4 @@ python3 -m venv .venv-articles
 - [LangGraph: Persistence](https://docs.langchain.com/oss/python/langgraph/persistence).
 - [Model Context Protocol: Security best practices](https://modelcontextprotocol.io/specification/latest/basic/security_best_practices).
 
-*Written May 6, 2026; revised October 24, 2026. Linked platform documentation can describe capabilities newer than the original publication date.*
+_Written May 6, 2026; revised October 28, 2026. Linked platform documentation can describe capabilities newer than the original publication date._

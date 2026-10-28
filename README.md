@@ -269,3 +269,7 @@ Each project has a dedicated page under `/projects/<slug>/`, linked from the hom
 ## Interactive ranking demo
 
 `/demo/` is a browser-only issue-ranking workbench linked from the homepage and Projects page. Fictional IDE/calendar context is blended into four hand-authored topic dimensions. Cosine similarity, synthetic history, and exponential recency are combined with normalized adjustable weights. The UI explains contributions, uncertain ties, and manual selection. It does not invoke a trained model, access Jira/Tempo, or send the selected values to a server. Page visits still use the site’s existing analytics. Data and scoring live in `src/lib/ranking-demo.ts`; UI lives in `src/components/ranking-demo.tsx`.
+
+## Blog naming
+
+The agent articles use **Agentic Loop Agent** as an independent reference-design name. Company-specific wording is removed from the blogs; factual employment history remains on the resume and project case studies. Existing article slugs, asset directories, and experiment filenames containing `tempo` are legacy technical identifiers retained to preserve shared links and reproducibility.

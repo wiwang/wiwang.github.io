@@ -1,6 +1,6 @@
-"""Illustrative Tempo Loop agent design and synthetic schedule scenarios.
+"""Illustrative Agentic Loop Agent design and synthetic schedule scenarios.
 
-No customer data, LLM API calls, or measured Tempo agent results are used.
+No customer data, LLM API calls, or measured production agent results are used.
 """
 from pathlib import Path
 import csv
@@ -20,6 +20,8 @@ BLUE,ORANGE,GREEN='#355e85','#b7693b','#527b67'
 
 def save(fig,name):
     fig.savefig(OUT/f'{name}.svg',bbox_inches='tight',metadata={'Date':None})
+    svg = OUT / f'{name}.svg'
+    svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().splitlines()) + '\n')
     fig.savefig(OUT/f'{name}.png',bbox_inches='tight',dpi=180)
     plt.close(fig)
 
@@ -36,7 +38,7 @@ def architecture():
         ax.text(x+w/2,y+.35,body,ha='center',va='center',fontsize=8.5,linespacing=1.5)
     def arrow(a,b,color=BLUE):
         ax.add_patch(FancyArrowPatch(a,b,arrowstyle='-|>',mutation_scale=12,color=color,lw=1.2))
-    box(.2,10.3,9.6,1.2,'Question + versioned Tempo Loop view','Selected project · time range · filters · user intent | not authorization')
+    box(.2,10.3,9.6,1.2,'Question + versioned application view','Selected project · time range · filters · user intent | not authorization')
     box(.2,8.1,4.5,1.25,'Profile + interaction memory','Preferences · prior decisions\nProvenance, scope, expiry, corrections')
     box(5.3,8.1,4.5,1.25,'Live state + RAG evidence','Jira / activity tools · retrieved docs\nAuthorized records, versions, timestamps')
     arrow((2.4,10.2),(2.4,9.5));arrow((7.6,10.2),(7.6,9.5))
@@ -49,7 +51,7 @@ def architecture():
     arrow((7.6,4.95),(7.6,5.7),ORANGE)
     box(.2,1.15,9.6,1.3,'Answer anchored to the original request','Facts + source references | interpretation | scenarios | suggested next steps',GREEN)
     arrow((7.6,3.4),(7.6,2.6),GREEN)
-    ax.text(5,.4,'Illustrative reference design, not Tempo’s private production topology.\nMutations, if added, require a separate authorization and confirmation path.',ha='center',fontsize=8.5,color='#687078')
+    ax.text(5,.4,'Illustrative reference design, not a proprietary production topology.\nMutations, if added, require a separate authorization and confirmation path.',ha='center',fontsize=8.5,color='#687078')
     fig.tight_layout();save(fig,'agent-context-architecture')
 
 def forecast():

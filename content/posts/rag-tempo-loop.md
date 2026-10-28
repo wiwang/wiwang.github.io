@@ -1,19 +1,19 @@
 ---
-title: "RAG for Tempo Loop: Retrieving Evidence an Agent Can Trust"
-description: "Build a RAG layer for Tempo Loop with UI-aware scope, hybrid retrieval, versioned Jira knowledge, evidence selection, citations, and evaluation beyond top-K search."
+title: "RAG for the Agentic Loop Agent: Retrieving Trustworthy Evidence"
+description: "Build a RAG layer for the Agentic Loop Agent with UI-aware scope, hybrid retrieval, versioned Jira knowledge, evidence selection, citations, and evaluation beyond top-K search."
 date: "2025-11-11"
-updated: "2026-10-24"
+updated: "2026-10-28"
 slug: rag-tempo-loop
 tags: ["rag", "agentic-ai", "information-retrieval", "context-engineering"]
 draft: false
 featured: false
 ---
 
-A user opens a project in Tempo Loop and asks, “Why might this release slip?” A search engine can find passages containing _release_, _delay_, or _blocker_. A useful agent needs something more precise: evidence about the selected project, visible to this user, valid at the relevant time, and sufficient to explain a particular delivery risk.
+A user opens a project in a work-management application and asks, “Why might this release slip?” A search engine can find passages containing _release_, _delay_, or _blocker_. A useful agent needs something more precise: evidence about the selected project, visible to this user, valid at the relevant time, and sufficient to explain a particular delivery risk.
 
 Retrieval-augmented generation—RAG—is the layer that connects the question to that evidence. Its job is not simply to fill the model's context window. It must preserve what a source says, where it came from, when it applies, and whether the user can access it.
 
-At Tempo, my work included an OpenSearch-based RAG pipeline with document ingestion, embedding generation, semantic retrieval, and contextual grounding, alongside tool-using agents and evaluation. This article develops an illustrative RAG design for a Tempo Loop agent. The architecture, document schemas, fictional projects, and experiments are examples, not disclosures of private Tempo systems or customer data.
+My engineering background includes OpenSearch-based RAG pipelines with document ingestion, embedding generation, semantic retrieval, and contextual grounding, alongside tool-using agents and evaluation. This article develops the retrieval layer for the **Agentic Loop Agent**, an independent reference design. The architecture, schemas, fictional projects, and experiments are illustrative and use no private company systems or customer data.
 
 The central distinction is between **finding something related** and **retrieving enough authorized evidence to support the answer**.
 
@@ -23,7 +23,7 @@ The [original RAG paper](https://arxiv.org/abs/2005.11401) combines parametric g
 
 Different questions require different retrieval or computation paths:
 
-| Loop question                             | RAG contribution                                                    | Other source or tool needed                                            |
+| User question                             | RAG contribution                                                    | Other source or tool needed                                            |
 | ----------------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | “Summarize what changed in this project.” | Relevant decisions, issue discussions, and change explanations      | An exhaustive change/event query for the requested period              |
 | “Why is the release at risk?”             | Evidence about blockers, scope commitments, and acceptance criteria | Current dependency graph and issue state                               |
@@ -33,7 +33,7 @@ Different questions require different retrieval or computation paths:
 
 A top-$K$ text search cannot establish the total number of overdue issues. Absence from its results does not establish that no blocker exists. Use structured queries for exhaustive counts and current operational facts; use RAG to retrieve their explanation and supporting knowledge.
 
-The [Tempo Loop agent article](/agentic-ai-tempo-loop/) describes the broader combination of user profile, historical activities, interaction memory, the current UI view, tools, and RAG. Here, the focus is the retrieval and evidence contract inside that system.
+The [Agentic Loop Agent article](/agentic-ai-tempo-loop/) describes the broader combination of user profile, historical activities, interaction memory, the current UI view, tools, and RAG. Here, the focus is the retrieval and evidence contract inside that system.
 
 **Key point:** route the question to the right source before optimizing the retriever.
 
@@ -43,7 +43,7 @@ The ingestion pipeline converts source records into searchable evidence. It shou
 
 [![An illustrative RAG pipeline connects versioned ingestion and UI-aware query scope to authorized retrieval, fusion, reranking, evidence selection, agent tools, and answer verification.](/posts/rag-tempo-loop/rag-architecture.svg)](/posts/rag-tempo-loop/rag-architecture.svg)
 
-_Figure 1. A reference design for Tempo Loop-style questions. Authorization and time constraints define the candidate universe; relevance ranks within it. Retrieved content remains evidence, not application instructions._
+_Figure 1. A reference design for work-management questions. Authorization and time constraints define the candidate universe; relevance ranks within it. Retrieved content remains evidence, not application instructions._
 
 A chunk record might include:
 
@@ -65,7 +65,7 @@ A chunk record might include:
 }
 ```
 
-This is an illustrative schema, not a Tempo or OpenSearch API. Some sources do not provide explicit business-validity intervals; do not invent them. Preserve source revisions and the times at which the system learned about them, and distinguish an inferred supersession relationship from a confirmed one.
+This is an illustrative schema, not a production or OpenSearch API. Some sources do not provide explicit business-validity intervals; do not invent them. Preserve source revisions and the times at which the system learned about them, and distinguish an inferred supersession relationship from a confirmed one.
 
 ### Separate source time from ingestion time
 
@@ -116,7 +116,7 @@ For tables and issue threads, retain relationships: column names, the relevant r
 
 ## 4. Resolve UI scope before semantic similarity
 
-Tempo Loop provides information beyond the user's sentence: selected project, selected issue, date range, filters, and a view revision. That context can disambiguate “this release” or “my current tasks.” It is not a permission grant.
+The host application provides information beyond the user's sentence: selected project, selected issue, date range, filters, and a view revision. That context can disambiguate “this release” or “my current tasks.” It is not a permission grant.
 
 An illustrative scope contract is
 
@@ -267,7 +267,7 @@ The implementation uses $k_1=1.2$, $b=0.75$, unique query terms, a fixed English
 
 <!-- RAG_RESULTS_END -->
 
-_Macro averages across the 30 deterministic cases. Required evidence labels identify the facts needed for these constructed questions, not an exhaustive relevance annotation. No confidence intervals, answer-accuracy estimates, or Tempo production claims follow from this table._
+_Macro averages across the 30 deterministic cases. Required evidence labels identify the facts needed for these constructed questions, not an exhaustive relevance annotation. No confidence intervals, answer-accuracy estimates, or production-performance claims follow from this table._
 
 [![A bar chart compares required-evidence recall and complete-evidence rate at three results for BM25 without UI scope, UI-scoped BM25, and UI scope with manual term expansion.](/posts/rag-tempo-loop/retrieval-at-three.svg)](/posts/rag-tempo-loop/retrieval-at-three.svg)
 
@@ -377,7 +377,7 @@ For an incident, ask in order:
 
 This sequence separates a missing-source problem from a relevance problem and a relevance problem from an unsupported inference. Each calls for a different intervention.
 
-## What dependable RAG adds to Tempo Loop
+## What dependable RAG adds to the Agentic Loop Agent
 
 A useful RAG layer makes the agent's context more precise: which project, which revision, which facts, which sources, and which gaps. It gives the model evidence it can cite, while leaving exact counts, permissions, and numerical forecasts with the systems designed to establish them.
 
@@ -405,4 +405,4 @@ Pinned dependencies and interpretation notes are in `scripts/articles/README.md`
 - [Liu et al.: Lost in the Middle](https://arxiv.org/abs/2307.03172).
 - [Amazon Bedrock: Retrieving information from data sources](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-how-retrieval.html).
 
-_Written November 11, 2025; revised October 24, 2026. The current revision links to companion articles and platform documentation that may be newer than the original article date._
+_Written November 11, 2025; revised October 28, 2026. The current revision links to companion articles and platform documentation that may be newer than the original article date._

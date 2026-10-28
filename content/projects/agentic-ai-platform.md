@@ -80,4 +80,4 @@ Traces should connect the user request, agent steps, MCP invocation, and data op
 
 The work brought together agent orchestration, protocol integration, persistent memory, warehouse access, and Kubernetes operations. The engineering contribution was making those pieces execute as a service with explicit contracts and observable failure modes. I do not report an unverified latency, cost, or task-success improvement here.
 
-The next layer is evaluating whether each execution actually answered the user’s question. See the [retrieval and evaluation project](/projects/agent-retrieval-evaluation/) and the [Tempo Loop agent article](/agentic-ai-tempo-loop/) for deeper treatment of context, grounding, and task completion.
+The next layer is evaluating whether each execution actually answered the user’s question. See the [retrieval and evaluation project](/projects/agent-retrieval-evaluation/) and the [Agentic Loop Agent article](/agentic-ai-tempo-loop/) for deeper treatment of context, grounding, and task completion.

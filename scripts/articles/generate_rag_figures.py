@@ -24,6 +24,8 @@ STOP = {'the','a','an','is','are','this','it','to','for','of','in','on','we','ou
 
 def save(fig,name):
     fig.savefig(OUT/f'{name}.svg',bbox_inches='tight',metadata={'Date':None})
+    svg = OUT / f'{name}.svg'
+    svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().splitlines()) + '\n')
     fig.savefig(OUT/f'{name}.png',bbox_inches='tight',dpi=180)
     plt.close(fig)
 
@@ -62,7 +64,7 @@ def architecture():
     arrow((2.45,5.5),(2.45,4.75));arrow((4.85,3.95),(5.15,3.95))
     box(.2,1.0,9.6,1.3,'Deliver an answer with an evidence ledger','Facts and sources | interpretation | assumptions | unresolved evidence','#527b67')
     arrow((7.55,3.2),(7.55,2.45))
-    ax.text(5,.35,'Illustrative architecture for a Tempo Loop use case.\nRetrieved documents cannot grant permissions or override application instructions.',ha='center',fontsize=8.5,color='#687078')
+    ax.text(5,.35,'Illustrative architecture for the Agentic Loop Agent.\nRetrieved documents cannot grant permissions or override application instructions.',ha='center',fontsize=8.5,color='#687078')
     fig.tight_layout();save(fig,'rag-architecture')
 
 def corpus_and_queries():

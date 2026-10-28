@@ -1,6 +1,6 @@
 ---
-title: "Evaluating Tempo Loop Agents: From Research Papers to Release Gates"
-description: "Turn agent-evaluation research into executable task contracts, stateful MCP tests, calibrated judges, repeated-run reliability, and cost-aware release decisions for Tempo Loop."
+title: "Evaluating the Agentic Loop Agent: From Research Papers to Release Gates"
+description: "Turn agent-evaluation research into executable task contracts, stateful MCP tests, calibrated judges, repeated-run reliability, and cost-aware release decisions for the Agentic Loop Agent."
 date: "2026-06-04"
 updated: "2026-10-28"
 slug: tempo-loop-agent-evals
@@ -9,36 +9,36 @@ draft: false
 featured: false
 ---
 
-A Tempo Loop user asks, “Is this project at risk, and what should I do next?” The agent returns a clear summary, cites two Jira issues, and recommends a sensible-looking priority order. A language-model judge gives the answer a high score.
+A user of the Agentic Loop Agent asks, “Is this project at risk, and what should I do next?” The agent returns a clear summary, cites two Jira issues, and recommends a sensible-looking priority order. A language-model judge gives the answer a high score.
 
 But suppose the agent queried the project discussed yesterday rather than the project open in the UI. Or used a superseded milestone. Or silently changed an issue’s priority even though the user only asked for advice. The prose can look excellent while the execution is wrong.
 
-This is the evaluation problem I would prioritize for a context-aware Loop agent: **prove that the system completed the right task, using the right evidence, within the right authority—not merely that it produced a convincing answer.**
+This is the evaluation problem I would prioritize for a context-aware work-management agent: **prove that the system completed the right task, using the right evidence, within the right authority—not merely that it produced a convincing answer.**
 
-At Tempo, my work included an automated agent evaluation harness combining LLM-as-a-Judge, deterministic validation, and execution trace analysis, alongside MCP tools, Snowflake access, persistent memory, and OpenSearch RAG. The design below is a proposed extension of that engineering approach, informed by the papers I have been studying. Task schemas, fixtures, release criteria, and examples are illustrative. They are not claims about Tempo’s private implementation, customer data, or measured production performance.
+My engineering experience includes automated agent evaluation combining LLM-as-a-Judge, deterministic validation, and execution trace analysis, alongside MCP tools, Snowflake access, persistent memory, and OpenSearch RAG. The design below applies that experience and the research literature to the **Agentic Loop Agent**, an independent reference design. Task schemas, fixtures, release criteria, and examples are illustrative, not descriptions of a former employer's private implementation or measured production performance.
 
 ## 1. Which research ideas are worth transferring?
 
 [A Survey on Evaluation of LLM-based Agents](https://arxiv.org/abs/2503.16416v2) organizes the field around capabilities, application domains, generalist agents, benchmark dimensions, and evaluation frameworks. Its distinction between static and dynamic environments is especially useful: predicting the next action from a fixed record does not reproduce the consequences of an agent’s earlier decisions.
 
-For Loop, I would use that survey as a map, then borrow specific mechanisms from the following papers. The last column is my proposed application, not a result demonstrated by the paper on Tempo data.
+For this agent, I would use that survey as a map, then borrow specific mechanisms from the following papers. The last column is my proposed application, not a result demonstrated by the paper on this reference design.
 
-| Research                                                     | Transferable idea                                          | What I would build for Loop                                                       |
-| ------------------------------------------------------------ | ---------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| [G-Eval](https://arxiv.org/abs/2303.16634)                   | Explicit evaluation criteria and structured judging        | Separate rubrics for groundedness, useful prioritization, and uncertainty         |
-| [MT-Bench & Chatbot Arena](https://arxiv.org/abs/2306.05685) | Judge validation and position/verbosity biases             | Human-audited judge tests, order swaps, and concise-versus-verbose controls       |
-| [RAGAS](https://arxiv.org/abs/2309.15217)                    | Decompose RAG evaluation into different quality dimensions | Diagnose retrieval separately from whether the answer uses evidence faithfully    |
-| [ARES](https://aclanthology.org/2024.naacl-long.20/)         | Trained evaluators plus human-labeled correction           | Calibrate aggregate estimates on reviewed Loop cases before trusting judge scores |
-| [τ-bench](https://arxiv.org/abs/2406.12045)                  | State-based task evaluation and repeated-run reliability   | Resettable tasks, observable outcomes, and all-attempts success measurements      |
-| [SWE-bench](https://arxiv.org/abs/2310.06770)                | Executable checks of an agent-produced outcome             | Test task-specific facts and state changes instead of answer resemblance          |
-| [AI Agents That Matter](https://arxiv.org/abs/2407.01502)    | Joint accuracy–cost evaluation, holdouts, reproducibility  | Compare complete agent configurations under equal budgets and frozen fixtures     |
-| [ToolSandbox](https://arxiv.org/abs/2408.04682)              | Stateful dependencies and intermediate milestones          | Test clarification, failed calls, stale state, and recovery over multiple turns   |
-| [MCP-Universe](https://arxiv.org/abs/2508.14704)             | Execution-based evaluation with real MCP servers           | Add a small integration tier that catches schema and tool-behavior drift          |
-| [ST-WebAgentBench](https://arxiv.org/abs/2410.06703)         | Completion under policy constraints                        | Fail unauthorized actions even when the requested facts are correct               |
+| Research                                                     | Transferable idea                                          | What I would build for the agent                                                   |
+| ------------------------------------------------------------ | ---------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| [G-Eval](https://arxiv.org/abs/2303.16634)                   | Explicit evaluation criteria and structured judging        | Separate rubrics for groundedness, useful prioritization, and uncertainty          |
+| [MT-Bench & Chatbot Arena](https://arxiv.org/abs/2306.05685) | Judge validation and position/verbosity biases             | Human-audited judge tests, order swaps, and concise-versus-verbose controls        |
+| [RAGAS](https://arxiv.org/abs/2309.15217)                    | Decompose RAG evaluation into different quality dimensions | Diagnose retrieval separately from whether the answer uses evidence faithfully     |
+| [ARES](https://aclanthology.org/2024.naacl-long.20/)         | Trained evaluators plus human-labeled correction           | Calibrate aggregate estimates on reviewed agent cases before trusting judge scores |
+| [τ-bench](https://arxiv.org/abs/2406.12045)                  | State-based task evaluation and repeated-run reliability   | Resettable tasks, observable outcomes, and all-attempts success measurements       |
+| [SWE-bench](https://arxiv.org/abs/2310.06770)                | Executable checks of an agent-produced outcome             | Test task-specific facts and state changes instead of answer resemblance           |
+| [AI Agents That Matter](https://arxiv.org/abs/2407.01502)    | Joint accuracy–cost evaluation, holdouts, reproducibility  | Compare complete agent configurations under equal budgets and frozen fixtures      |
+| [ToolSandbox](https://arxiv.org/abs/2408.04682)              | Stateful dependencies and intermediate milestones          | Test clarification, failed calls, stale state, and recovery over multiple turns    |
+| [MCP-Universe](https://arxiv.org/abs/2508.14704)             | Execution-based evaluation with real MCP servers           | Add a small integration tier that catches schema and tool-behavior drift           |
+| [ST-WebAgentBench](https://arxiv.org/abs/2410.06703)         | Completion under policy constraints                        | Fail unauthorized actions even when the requested facts are correct                |
 
 I would start with executable contracts, stateful fixtures, repeated trials, and a small calibrated judge. I would postpone a large autonomous evaluator until simpler checks reveal what it must inspect.
 
-**Key point:** adapt evaluation mechanisms to the product’s failure modes; do not assume a higher score on another domain’s benchmark predicts Loop usefulness.
+**Key point:** adapt evaluation mechanisms to the product’s failure modes; do not assume a higher score on another domain’s benchmark predicts usefulness in this application.
 
 ## 2. Make each evaluation case an executable contract
 
@@ -96,11 +96,11 @@ Label those outcomes explicitly. A system can otherwise inflate an answer-qualit
 
 ## 3. Grade outcomes and execution together
 
-SWE-bench evaluates software changes through executable tests rather than textual similarity to a reference patch. The transferable principle is that a result should be tested in its environment. It does not imply that every Loop answer can be reduced to a single exact-match test.
+SWE-bench evaluates software changes through executable tests rather than textual similarity to a reference patch. The transferable principle is that a result should be tested in its environment. It does not imply that every agent answer can be reduced to a single exact-match test.
 
 I would use task-specific checks for facts and operations, plus semantic assessment where multiple explanations can be valid.
 
-| Loop capability     | Executable or labeled check                                       | What a fluent answer could hide                              |
+| Agent capability    | Executable or labeled check                                       | What a fluent answer could hide                              |
 | ------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------ |
 | Work summary        | Scope, local-time interval, event coverage, deduplicated totals   | Summarizing only the first page of activities                |
 | Project risk        | Current blockers, dependencies, milestone version, evidence links | Citing a resolved blocker or superseded deadline             |
@@ -134,7 +134,7 @@ The **required numerical facts** check asks only whether the two expected number
 
 <!-- LOOP_EVAL_RESULTS_END -->
 
-Six of eight constructed traces pass the narrow numerical check; only two pass the complete contract. Those fractions demonstrate the effect of the hand-authored failure cases. They are **not** an experiment on agent accuracy, an LLM judge comparison, or evidence that a particular grader improves Tempo performance.
+Six of eight constructed traces pass the narrow numerical check; only two pass the complete contract. Those fractions demonstrate the effect of the hand-authored failure cases. They are **not** an experiment on agent accuracy, an LLM judge comparison, or evidence that a particular grader improves production performance.
 
 The wrong-scope case deliberately returns the same numbers as the correct project. It exposes why answer-value checks alone are insufficient. The two valid traces call the read tools in different orders: an evaluator should accept equivalent executions rather than require one reference transcript.
 
@@ -150,7 +150,7 @@ The grader operates on explicit structured fields. It does not extract claims fr
 
 ## 4. Use stateful environments where the state matters
 
-ToolSandbox evaluates state dependencies and milestones over interactive trajectories. WebArena provides functional websites for long-horizon tasks, while MCP-Universe evaluates interactions with real MCP servers. I would borrow their emphasis on execution, with different isolation levels for different Loop tests.
+ToolSandbox evaluates state dependencies and milestones over interactive trajectories. WebArena provides functional websites for long-horizon tasks, while MCP-Universe evaluates interactions with real MCP servers. I would borrow their emphasis on execution, with different isolation levels for different agent tests.
 
 | Tier               | Environment                                            | Purpose                                                                        |
 | ------------------ | ------------------------------------------------------ | ------------------------------------------------------------------------------ |
@@ -170,11 +170,11 @@ A useful trace records resolved scope, tool invocations, input/output references
 
 I would annotate a partial order of necessary milestones: resolve authorized scope before scoped access; collect required evidence before asserting a risk; obtain confirmation before an authorized mutation. Independent read calls may run in either order or concurrently. This avoids penalizing a more efficient valid execution merely because it differs from a golden trajectory.
 
-[Agent-as-a-Judge](https://arxiv.org/abs/2410.10934) explores evaluators that inspect an agent’s work and intermediate artifacts. For Loop, I would constrain such an evaluator to read-only trace inspection, bounded tool access, and evidence-backed findings. Its greater autonomy is not itself evidence of correctness; it needs calibration and a cost budget too.
+[Agent-as-a-Judge](https://arxiv.org/abs/2410.10934) explores evaluators that inspect an agent’s work and intermediate artifacts. For this agent, I would constrain such an evaluator to read-only trace inspection, bounded tool access, and evidence-backed findings. Its greater autonomy is not itself evidence of correctness; it needs calibration and a cost budget too.
 
 ## 5. Give the judge a narrow job and measure its mistakes
 
-G-Eval motivates explicit criteria and structured judgment rather than a vague “rate this answer” prompt. MT-Bench and Chatbot Arena examine judge alignment with human preferences and document biases including answer position and verbosity. Neither establishes that a judge is automatically reliable on Loop risk analysis.
+G-Eval motivates explicit criteria and structured judgment rather than a vague “rate this answer” prompt. MT-Bench and Chatbot Arena examine judge alignment with human preferences and document biases including answer position and verbosity. Neither establishes that a judge is automatically reliable on project risk analysis.
 
 My first judge rubric would focus on one property: **are the answer’s factual claims supported by the allowed evidence at the specified time?** Helpfulness and presentation can be separate rubrics. Permissions and exact arithmetic should remain deterministic where possible.
 
@@ -207,7 +207,7 @@ A pairwise preference result is useful for presentation or utility comparisons; 
 
 ### What I would borrow from ARES—and what I would not shortcut
 
-ARES trains lightweight evaluators using synthetic data and uses a smaller human-labeled set with prediction-powered inference to correct aggregate estimates. The practical lesson for Loop is to treat judge outputs as fallible measurements with human calibration.
+ARES trains lightweight evaluators using synthetic data and uses a smaller human-labeled set with prediction-powered inference to correct aggregate estimates. The practical lesson for this agent is to treat judge outputs as fallible measurements with human calibration.
 
 Synthetic answers are useful for generating targeted negative examples, but an audit set made only of synthetic errors can miss actual agent failures. Include reviewed traces from representative workflows, under appropriate data handling and de-identification.
 
@@ -215,7 +215,7 @@ I would begin with a measured human audit and expand to a statistical correction
 
 ## 6. Separate retrieval quality from answer quality
 
-RAGAS separates different aspects of retrieval-augmented answers rather than treating a RAG pipeline as a single opaque score. For Loop, I would retain a labeled retrieval set for important tasks even when some automated metrics can operate without reference answers.
+RAGAS separates different aspects of retrieval-augmented answers rather than treating a RAG pipeline as a single opaque score. For this agent, I would retain a labeled retrieval set for important tasks even when some automated metrics can operate without reference answers.
 
 Four questions should remain separate:
 
@@ -230,11 +230,11 @@ Use stable source and evidence-unit IDs for relevance and required-evidence cove
 
 For fault localization, compare the end-to-end run with a run given reviewed evidence or a known-correct tool result. If supplying correct evidence resolves the failure, retrieval is implicated; if it does not, the problem may be interpretation or tool use. Such interventions are diagnostic experiments, not a clean causal decomposition when other behavior changes between runs.
 
-See [RAG for Tempo Loop](/rag-tempo-loop/) for the evidence-layer design and [the retrieval/evaluation case study](/projects/agent-retrieval-evaluation/) for my underlying engineering work.
+See [RAG for the Agentic Loop Agent](/rag-tempo-loop/) for the evidence-layer design and [the retrieval/evaluation case study](/projects/agent-retrieval-evaluation/) for my underlying engineering work.
 
 ## 7. Measure repeatability, not only a lucky success
 
-τ-bench distinguishes reliability across repeated trials from finding at least one success among several attempts. That distinction matters when the same Loop question is asked on different days or with small conversational variations.
+τ-bench distinguishes reliability across repeated trials from finding at least one success among several attempts. That distinction matters when the same user question is asked on different days or with small conversational variations.
 
 For a fixed task with independent attempts and a hypothetical success probability $p$:
 
@@ -312,7 +312,7 @@ Keep a development set for iteration and a genuinely held-out release audit. Rec
 
 **Key point:** release evidence should include failure categories, uncertainty, and resource budgets—not just a winning average.
 
-## 9. A concrete first implementation for Loop
+## 9. A concrete first implementation for the Agentic Loop Agent
 
 I would build a small vertical slice around read-only project risk before expanding to every agent capability.
 
@@ -338,11 +338,11 @@ Use metamorphic cases for targeted invariants: changing only the display title s
 
 For action-taking agents, add confirmation and state-transition contracts. For forecasting, compare predicted ranges with realized outcomes using time-correct holdouts; a judge’s preference for a confident estimate cannot measure calibration. For prioritization, obtain reviewed preference or constraint labels rather than pretending that one universal task order is objectively correct.
 
-SWE-Lancer’s mapping from task outcomes to real work value is a useful reminder to prioritize high-value workflows. Its software-task payouts do not provide an ROI estimate for Loop. User time saved, avoided corrections, and avoided harmful actions require product-specific measurement.
+SWE-Lancer’s mapping from task outcomes to real work value is a useful reminder to prioritize high-value workflows. Its software-task payouts do not provide an ROI estimate for this agent. User time saved, avoided corrections, and avoided harmful actions require product-specific measurement.
 
 ## What I would implement first
 
-If I could make only three changes to a Loop evaluation stack, they would be:
+If I could make only three changes to this agent’s evaluation stack, they would be:
 
 1. **Executable task contracts** that include UI scope, evidence revisions, exact facts, and forbidden actions.
 2. **Resettable repeated trials** that expose unstable behavior, with cost and latency attached to every result.
@@ -368,6 +368,6 @@ The strongest evaluation stack combines these ideas. Deterministic checks establ
 - Lu et al., [ToolSandbox](https://arxiv.org/abs/2408.04682), 2024 preprint; revised 2025.
 - Luo et al., [MCP-Universe](https://arxiv.org/abs/2508.14704), 2025.
 
-The original generator is [scripts/articles/generate_loop_evals.py](https://github.com/wiwang/wiwang.github.io/blob/master/scripts/articles/generate_loop_evals.py). It exports the two figures, exact calculation tables, eight constructed traces, grader results, and a standalone copy of the grader. The scientific plotting dependencies are pinned in [the experiment instructions](https://github.com/wiwang/wiwang.github.io/blob/master/scripts/articles/README.md). No model or judge API is called, and no Tempo data is used.
+The original generator is [scripts/articles/generate_loop_evals.py](https://github.com/wiwang/wiwang.github.io/blob/master/scripts/articles/generate_loop_evals.py). It exports the two figures, exact calculation tables, eight constructed traces, grader results, and a standalone copy of the grader. The scientific plotting dependencies are pinned in [the experiment instructions](https://github.com/wiwang/wiwang.github.io/blob/master/scripts/articles/README.md). No model or judge API is called, and no customer data is used.
 
 _Written June 4, 2026; revised October 28, 2026. References and downloadable examples reflect the current revision._

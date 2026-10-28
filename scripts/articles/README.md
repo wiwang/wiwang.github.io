@@ -13,11 +13,11 @@ python3 -m venv .venv-articles
 .venv-articles/bin/python scripts/articles/generate_tempo_ranking_figures.py
 # MLOps reference architecture and monitoring-delay simulation:
 .venv-articles/bin/python scripts/articles/generate_mlops_figures.py
-# Tempo Loop RAG architecture and synthetic retrieval study:
+# Agentic Loop Agent RAG architecture and synthetic retrieval study:
 .venv-articles/bin/python scripts/articles/generate_rag_figures.py
-# Tempo Loop evaluation contracts and exact reliability calculations:
+# Agentic Loop Agent evaluation contracts and exact reliability calculations:
 .venv-articles/bin/python scripts/articles/generate_loop_evals.py
-# Tempo Loop agent reference design and conditional schedule forecasts:
+# Agentic Loop Agent agent reference design and conditional schedule forecasts:
 .venv-articles/bin/python scripts/articles/generate_agentic_ai_figures.py
 ```
 
@@ -35,23 +35,23 @@ Five seeds (7, 17, 27, 37, 47) generate 200 users, 150 fictional Jira-like issue
 
 Issue descriptors combine a five-dimensional workstream indicator and eight Gaussian coordinates, followed by unit normalization. Evaluation context is a noisy version of the active issue's descriptor. This is a generative proxy for semantic evidence, not an actual sentence-transformer model. Ground-truth keys are not model inputs. BPR receives training links only; its positive sampling weights repeated links, and its negative sampling excludes training positives. Test labels never enter fitting. The semantic and hybrid methods use current context and static descriptors. Their scores are not calibrated probabilities.
 
-Methods are compared using Top-1, Top-5, and MRR over all candidates, with stable issue-ID tie breaking. The hybrid uses a fixed coefficient of 0.1 on per-user z-normalized BPR scores. No settings are selected using test labels. Reported deviations are sample standard deviations across generated datasets/fits, not confidence intervals. The generator exports the seed-7 issue catalog (including synthetic descriptors), event records, and held-out activity vectors along with all per-run and aggregate metrics. These data do not reproduce Tempo's customers, production topology, or model performance.
+Methods are compared using Top-1, Top-5, and MRR over all candidates, with stable issue-ID tie breaking. The hybrid uses a fixed coefficient of 0.1 on per-user z-normalized BPR scores. No settings are selected using test labels. Reported deviations are sample standard deviations across generated datasets/fits, not confidence intervals. The generator exports the seed-7 issue catalog (including synthetic descriptors), event records, and held-out activity vectors along with all per-run and aggregate metrics. These data do not reproduce customer records, production topology, or model performance.
 
 ## MLOps monitoring
 
-The architecture is an illustrative reference design. The monitoring simulation (seed 20261024) generates 60 days with 4,000 binary-classification requests daily. A nonpredictive context feature shifts on day 15. During days 30–39, predictive inputs are offset by -1.5, and a separate lognormal feature-age distribution increases. Those two injected faults are deliberately coincident, not a causal model linking feature age to log loss. All outcomes become available exactly seven days after prediction. The plot shows both event-day loss and the same loss at its availability day. The summary averages daily p95 ages; it is not a pooled percentile. These are not ranking metrics, customer incidents, or Tempo SLAs.
+The architecture is an illustrative reference design. The monitoring simulation (seed 20261024) generates 60 days with 4,000 binary-classification requests daily. A nonpredictive context feature shifts on day 15. During days 30–39, predictive inputs are offset by -1.5, and a separate lognormal feature-age distribution increases. Those two injected faults are deliberately coincident, not a causal model linking feature age to log loss. All outcomes become available exactly seven days after prediction. The plot shows both event-day loss and the same loss at its availability day. The summary averages daily p95 ages; it is not a pooled percentile. These are not ranking metrics, customer incidents, or production SLAs.
 
-## Tempo Loop agent scenarios
+## Agentic Loop Agent agent scenarios
 
 `generate_agentic_ai_figures.py` draws a reference context architecture and a fictional six-task dependency graph, then compares 40,000 paired duration scenarios (seed 20261024). Task durations are independent lognormal draws with log-space standard deviation 0.35 and medians 2, 6, 4, 3, 4, and 1 working days. The API and UI branches run concurrently; no shared-resource, holiday, scope-change, or correlated-delay effects are modeled. The blocker scenario independently adds a uniform 3–8 working-day delay to the API task with probability 0.35. Both scenarios reuse the same primitive duration draws.
 
-Quantiles and deadline probabilities are conditional on chosen illustrative assumptions, not calibrated production forecasts or LLM performance measurements. CSV outputs include the task graph, summary, and every paired simulation result. The generator asserts that the blocker scenario never finishes earlier than the baseline for the same sample. No Tempo data or LLM API calls are used. The article is dated May 6, 2026 and revised October 24, 2026; MLOps is dated October 1, 2024 and revised October 24, 2026.
+Quantiles and deadline probabilities are conditional on chosen illustrative assumptions, not calibrated production forecasts or LLM performance measurements. CSV outputs include the task graph, summary, and every paired simulation result. The generator asserts that the blocker scenario never finishes earlier than the baseline for the same sample. No customer data or LLM API calls are used. The article is dated May 6, 2026 and revised October 24, 2026; MLOps is dated October 1, 2024 and revised October 24, 2026.
 
-## Tempo Loop RAG retrieval
+## Agentic Loop Agent RAG retrieval
 
-`generate_rag_figures.py` creates an illustrative architecture and a deterministic BM25 study over 217 synthetic records. Tenant, permission, and availability/validity filters leave 36 eligible records; 30 templated questions cover six UI-selected projects. It compares retrieval without project scope, scoped retrieval, and scoped retrieval with a manually tailored term dictionary. All methods use identical authorization/time constraints, BM25 statistics, and stable ID tie breaking. The dictionary is designed for these same templates: its perfect coverage is a demonstration, not held-out generalization, dense retrieval performance, or answer quality. Raw corpus, query labels, rankings, and metrics are exported. No Tempo data, embeddings, or LLM calls are used. The article is dated November 11, 2025 and revised October 24, 2026.
+`generate_rag_figures.py` creates an illustrative architecture and a deterministic BM25 study over 217 synthetic records. Tenant, permission, and availability/validity filters leave 36 eligible records; 30 templated questions cover six UI-selected projects. It compares retrieval without project scope, scoped retrieval, and scoped retrieval with a manually tailored term dictionary. All methods use identical authorization/time constraints, BM25 statistics, and stable ID tie breaking. The dictionary is designed for these same templates: its perfect coverage is a demonstration, not held-out generalization, dense retrieval performance, or answer quality. Raw corpus, query labels, rankings, and metrics are exported. No customer data, embeddings, or LLM calls are used. The article is dated November 11, 2025 and revised October 24, 2026.
 
-## Tempo Loop evaluation contracts
+## Agentic Loop Agent evaluation contracts
 
 `generate_loop_evals.py` creates an illustrative evaluation architecture, exact probability curves for fixed hypothetical p values (0.80, 0.90, 0.95) and independent attempts k=1..8, and exact one-sided binomial upper failure bounds after zero failures in n=60, 300, 1000 cases. No Monte Carlo sampling or model execution is involved. The bounds require the stated independent, representative Bernoulli sampling assumptions.
 

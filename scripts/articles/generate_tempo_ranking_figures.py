@@ -1,4 +1,4 @@
-"""Synthetic Jira-shaped activity-to-issue benchmark. No Tempo/customer data."""
+"""Synthetic Jira-shaped activity-to-issue benchmark. No customer data."""
 from pathlib import Path
 import csv,json,re
 import numpy as np

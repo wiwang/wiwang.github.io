@@ -1,4 +1,4 @@
-"""Illustrative MLOps architecture and synthetic monitoring experiment; no Tempo data."""
+"""Illustrative MLOps architecture and synthetic monitoring experiment; no customer data."""
 from pathlib import Path
 import csv
 import json
@@ -15,6 +15,8 @@ plt.rcParams.update({'font.family':'DejaVu Sans','font.size':10,'axes.spines.top
 BLUE,ORANGE,GREEN = '#355e85','#b7693b','#527b67'
 def save(fig,name):
     fig.savefig(OUT/f'{name}.svg',bbox_inches='tight',metadata={'Date':None})
+    svg = OUT / f'{name}.svg'
+    svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().splitlines()) + '\n')
     fig.savefig(OUT/f'{name}.png',bbox_inches='tight',dpi=180)
     plt.close(fig)
 
@@ -39,7 +41,7 @@ def architecture():
     box(.3,1.2,9.4,1.25,'Monitor → diagnose → controlled action','Service + features + delayed model quality + product outcomes',GREEN)
     arrow((7.6,3.5),(7.6,2.6),GREEN)
     ax.text(2.4,2.95,'Orchestration coordinates dependencies;\nit is not the request-time data path.',ha='center',va='center',fontsize=9,color='#687078')
-    ax.text(5,.45,'Illustrative reference architecture inspired by the problem domain.\nNot a representation of Tempo’s private production topology.',ha='center',va='center',fontsize=9,color='#687078')
+    ax.text(5,.45,'Illustrative reference architecture inspired by the problem domain.\nNot a representation of a proprietary production topology.',ha='center',va='center',fontsize=9,color='#687078')
     fig.tight_layout();save(fig,'architecture')
 
 def monitoring():

@@ -2,7 +2,7 @@
 title: "Inferring Jira Issues and Ranking Timesheet Suggestions"
 description: "Connect activity signals to Jira issue inference: candidate retrieval, semantic context, collaborative ranking, implicit feedback, and evaluation for recurring work."
 date: "2021-07-21"
-updated: "2026-10-24"
+updated: "2026-10-28"
 slug: recomendation
 tags: ["machine-learning", "recommendation-systems", "ranking", "mlops"]
 draft: false
@@ -11,11 +11,11 @@ featured: false
 
 A useful timesheet suggestion starts with a difficult inference: **which Jira issue was the person working on?** Activity signals can be incomplete, an explicit issue key may be missing, and the same person can move between several tasks in a short period.
 
-At Tempo, my work included activity-aware time management, learning-to-rank and time-awareness models, semantic search over Jira tickets, and feature pipelines supporting training and inference. The project context for this article is inferring the active Jira issue from activity signals, then ranking timesheet suggestions.
+My engineering experience includes activity-aware time management, learning-to-rank and time-awareness models, semantic search over Jira tickets, and feature pipelines supporting training and inference. The project context for this article is inferring the active Jira issue from activity signals, then ranking timesheet suggestions.
 
 That context changes the recommendation problem. Previously worked issues remain valid candidates. Organization boundaries and issue permissions constrain retrieval. User history helps, but the current activity window may indicate that the person has changed tasks.
 
-The examples, feature names, and experiments below are an illustrative design for that problem. All downloadable records and plotted results are synthetic; they are not Tempo customer data, a reproduction of Tempo's implementation, or its production model scores.
+The examples, feature names, and experiments below are an illustrative design for that problem. All downloadable records and plotted results are synthetic; they are not customer data, a reproduction of a proprietary implementation, or production model scores.
 
 ## Define the decision at the activity-window level
 
@@ -28,13 +28,13 @@ $$
 
 The system first infers plausible issues, then constructs ranked timesheet suggestions. If a suggestion also includes a time interval or duration, that introduces another prediction problem with its own labels and error measures. Correct issue ranking alone does not establish correct time attribution.
 
-| Question | Example decision | What it changes |
-| --- | --- | --- |
-| What is the prediction unit? | One bounded activity window | Keep that window's candidates together in evaluation |
-| What is the target? | The confirmed active Jira issue | Define confirmation, corrections, and unresolved windows |
-| Which issues are eligible? | Issues visible to this user and valid for this workflow | Apply organization and permission checks independently of relevance |
-| Can an issue repeat? | Yes: work often continues on an existing issue | Do not exclude an issue merely because it appeared in history |
-| Can the system abstain? | Offer alternatives or ask for confirmation when evidence is weak | Evaluate coverage and error among accepted suggestions |
+| Question                     | Example decision                                                 | What it changes                                                     |
+| ---------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------- |
+| What is the prediction unit? | One bounded activity window                                      | Keep that window's candidates together in evaluation                |
+| What is the target?          | The confirmed active Jira issue                                  | Define confirmation, corrections, and unresolved windows            |
+| Which issues are eligible?   | Issues visible to this user and valid for this workflow          | Apply organization and permission checks independently of relevance |
+| Can an issue repeat?         | Yes: work often continues on an existing issue                   | Do not exclude an issue merely because it appeared in history       |
+| Can the system abstain?      | Offer alternatives or ask for confirmation when evidence is weak | Evaluate coverage and error among accepted suggestions              |
 
 A missing key is not an invitation to invent one. The output should resolve to a real, eligible issue ID. If a source contains an explicit key, validate it against the relevant Jira instance and authorization context rather than treating the string as proof of access or relevance.
 
@@ -44,11 +44,11 @@ A missing key is not an invitation to invent one. The output should resolve to a
 
 A large organization may have too many visible issues for a complex model to score exhaustively on every request. Separate the stages:
 
-| Stage | Role in the Jira workflow | Failure to measure separately |
-| --- | --- | --- |
-| Candidate generation | Retrieve plausible issues using recent work, assignment, semantic similarity, and other permitted context | The correct issue never reaches the ranker |
-| Ranking | Combine current activity evidence with user–issue history and issue attributes | A familiar issue outranks the issue implied by the current activity |
-| Suggestion construction | Resolve eligible IDs, deduplicate, apply confidence/fallback rules, and present timesheet suggestions | A high-scoring but inaccessible or invalid issue is surfaced |
+| Stage                   | Role in the Jira workflow                                                                                 | Failure to measure separately                                       |
+| ----------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Candidate generation    | Retrieve plausible issues using recent work, assignment, semantic similarity, and other permitted context | The correct issue never reaches the ranker                          |
+| Ranking                 | Combine current activity evidence with user–issue history and issue attributes                            | A familiar issue outranks the issue implied by the current activity |
+| Suggestion construction | Resolve eligible IDs, deduplicate, apply confidence/fallback rules, and present timesheet suggestions     | A high-scoring but inaccessible or invalid issue is surfaced        |
 
 This separation follows a general pattern described in [Google's recommendation-system overview](https://developers.google.com/machine-learning/recommendation/overview/types). The [2016 YouTube paper](https://research.google/pubs/deep-neural-networks-for-youtube-recommendations/) provides a historical example of separate candidate-generation and ranking models; the Jira task has different eligibility and repetition semantics.
 
@@ -66,15 +66,15 @@ The candidate policy sets an upper bound on attainable ranking recall: a ranker 
 
 The useful distinction is between a signal that was available before prediction and an outcome learned afterward.
 
-| Illustrative signal | How it can help | What can go wrong |
-| --- | --- | --- |
-| Recent confirmed user–issue associations | Provides a continuity prior | A frequent historical issue dominates a real task switch |
+| Illustrative signal                                | How it can help                         | What can go wrong                                                   |
+| -------------------------------------------------- | --------------------------------------- | ------------------------------------------------------------------- |
+| Recent confirmed user–issue associations           | Provides a continuity prior             | A frequent historical issue dominates a real task switch            |
 | Similarity between activity context and issue text | Supports inference when a key is absent | Issue text is stale, or evaluation uses a future edited description |
-| Time since the user's last issue interaction | Captures recency | An absent integration is mistaken for inactivity |
-| Issue assignment and workflow state | Narrows plausible candidates | Present-day state leaks into historical evaluation |
-| Calendar or IDE source coverage | Expresses uncertainty about the context | Missing evidence is encoded as a confident zero |
+| Time since the user's last issue interaction       | Captures recency                        | An absent integration is mistaken for inactivity                    |
+| Issue assignment and workflow state                | Narrows plausible candidates            | Present-day state leaks into historical evaluation                  |
+| Calendar or IDE source coverage                    | Expresses uncertainty about the context | Missing evidence is encoded as a confident zero                     |
 
-These are candidate features, not a claim that each was used in Tempo's deployed model. Raw activity content can contain sensitive information. Minimize collection, separate organizations, restrict access, and define retention and derived-data deletion policies.
+These are candidate features, not a claim that each was used in a deployed model. Raw activity content can contain sensitive information. Minimize collection, separate organizations, restrict access, and define retention and derived-data deletion policies.
 
 A displayed suggestion is not a confirmed association. A click is not always a final timesheet decision. Preserve confirmation, rejection, correction, and unresolved states rather than collapsing them into a single binary event.
 
@@ -91,11 +91,11 @@ The absence of a click can mean the issue was never shown. A confirmation log co
 
 Consider an illustrative confirmation matrix:
 
-| User | DEMO-101 | DEMO-102 | DEMO-103 | DEMO-104 |
-| --- | --- | --- | --- | --- |
-| User A | 3 | 1 | ? | ? |
-| User B | 2 | ? | 2 | ? |
-| User C | ? | ? | 1 | 4 |
+| User   | DEMO-101 | DEMO-102 | DEMO-103 | DEMO-104 |
+| ------ | -------- | -------- | -------- | -------- |
+| User A | 3        | 1        | ?        | ?        |
+| User B | 2        | ?        | 2        | ?        |
+| User C | ?        | ?        | 1        | 4        |
 
 Numbers represent historical confirmed links; question marks mean no recorded positive evidence. These are fictional keys, not real Jira tickets.
 
@@ -161,19 +161,19 @@ The negative sampler is part of the model design. Restrict real training compari
 
 ## A synthetic Jira-shaped activity-to-issue experiment
 
-The experiment below tests an intentionally narrow question: **does current activity context add information beyond user–issue history?** It generates a small organization, fictional issues, activity windows, and confirmed issue links. No actual Tempo or Jira customer records are used.
+The experiment below tests an intentionally narrow question: **does current activity context add information beyond user–issue history?** It generates a small organization, fictional issues, activity windows, and confirmed issue links. No actual customer records are used.
 
-| Setting | Value |
-| --- | --- |
-| Organization | One synthetic organization; all 150 issues are eligible |
-| Users and issues | 200 users, 150 fictional keys DEMO-101 through DEMO-250 |
-| Work structure | Five latent workstreams, 30 issues each |
-| User history | One primary workstream per user; 85% probability mass on that stream |
-| Request sequence | 20 issue-linked activity windows per user, sampled with replacement |
-| Temporal split | First 16 windows train history; last four are evaluation requests |
-| Activity representation | Noisy synthetic semantic vector correlated with the active issue |
-| Evaluation universe | All 150 eligible issues, including previously worked issues |
-| Repetitions | Five generated datasets/fits, seeds 7, 17, 27, 37, 47 |
+| Setting                 | Value                                                                |
+| ----------------------- | -------------------------------------------------------------------- |
+| Organization            | One synthetic organization; all 150 issues are eligible              |
+| Users and issues        | 200 users, 150 fictional keys DEMO-101 through DEMO-250              |
+| Work structure          | Five latent workstreams, 30 issues each                              |
+| User history            | One primary workstream per user; 85% probability mass on that stream |
+| Request sequence        | 20 issue-linked activity windows per user, sampled with replacement  |
+| Temporal split          | First 16 windows train history; last four are evaluation requests    |
+| Activity representation | Noisy synthetic semantic vector correlated with the active issue     |
+| Evaluation universe     | All 150 eligible issues, including previously worked issues          |
+| Repetitions             | Five generated datasets/fits, seeds 7, 17, 27, 37, 47                |
 
 The synthetic issue descriptor has 13 dimensions: a five-dimensional workstream indicator plus eight independent Gaussian coordinates with standard deviation 0.35, followed by unit normalization. Each evaluation activity vector adds independent Gaussian noise with standard deviation 0.35 to its active issue descriptor and is normalized again.
 
@@ -183,7 +183,7 @@ Historical confirmations are assumed available before evaluation starts. Model f
 
 [![Synthetic historical confirmation counts form workstream-related blocks in a user–Jira issue matrix.](/posts/recomendation/jira-interactions.svg)](/posts/recomendation/jira-interactions.svg)
 
-*Figure 1. Training link counts for seed 7, sorted by latent workstream only for visualization. Darker cells represent more repeated confirmations. Historical issues remain valid candidates.*
+_Figure 1. Training link counts for seed 7, sorted by latent workstream only for visualization. Darker cells represent more repeated confirmations. Historical issues remain valid candidates._
 
 ### Compare four signals under the same candidate policy
 
@@ -218,20 +218,20 @@ For a request with correct issue DEMO-103 and ranked list `[DEMO-101, DEMO-103, 
 
 <!-- JIRA_TABLE_START -->
 
-| Model | Top-1 accuracy | Top-5 accuracy | MRR |
-| --- | --- | --- | --- |
-| Issue popularity | 0.006 ± 0.003 | 0.029 ± 0.003 | 0.035 ± 0.003 |
-| User–issue BPR | 0.032 ± 0.004 | 0.142 ± 0.010 | 0.116 ± 0.002 |
-| Activity similarity | 0.325 ± 0.010 | 0.693 ± 0.021 | 0.489 ± 0.011 |
-| Context + history | 0.324 ± 0.015 | 0.706 ± 0.012 | 0.494 ± 0.010 |
+| Model               | Top-1 accuracy | Top-5 accuracy | MRR           |
+| ------------------- | -------------- | -------------- | ------------- |
+| Issue popularity    | 0.006 ± 0.003  | 0.029 ± 0.003  | 0.035 ± 0.003 |
+| User–issue BPR      | 0.032 ± 0.004  | 0.142 ± 0.010  | 0.116 ± 0.002 |
+| Activity similarity | 0.325 ± 0.010  | 0.693 ± 0.021  | 0.489 ± 0.011 |
+| Context + history   | 0.324 ± 0.015  | 0.706 ± 0.012  | 0.494 ± 0.010 |
 
 <!-- JIRA_TABLE_END -->
 
-*Mean ± sample standard deviation across five generated datasets and fits. These are synthetic issue-inference results, not Tempo's reported production results. The deviations are not confidence intervals.*
+_Mean ± sample standard deviation across five generated datasets and fits. These are synthetic issue-inference results, not reported production results. The deviations are not confidence intervals._
 
 [![Top-1 and Top-5 accuracy compare popularity, user–issue BPR, activity similarity, and a context-plus-history combination on synthetic Jira-shaped requests.](/posts/recomendation/jira-ranking-results.svg)](/posts/recomendation/jira-ranking-results.svg)
 
-*Figure 2. Every method ranks the same complete 150-issue candidate universe. The experiment is constructed to contain informative current context; it tests that assumption rather than proving a universal advantage for semantic models.*
+_Figure 2. Every method ranks the same complete 150-issue candidate universe. The experiment is constructed to contain informative current context; it tests that assumption rather than proving a universal advantage for semantic models._
 
 The distinction to look for is **history versus current evidence**. A history-only user model produces the same ranking for every evaluation window belonging to that user. The activity vector can change from window to window and disambiguate issues within the same workstream.
 
@@ -273,14 +273,14 @@ A controlled online experiment should measure the real task—such as confirmed 
 
 ## A practical serving design
 
-| Situation | Intended behavior | What to monitor |
-| --- | --- | --- |
-| Strong validated issue evidence | Rank the eligible issue with supporting context | Incorrect high-confidence suggestions |
-| Ambiguous semantic evidence | Offer a short list or ask for confirmation | Accuracy versus coverage and correction rate |
-| New issue with little history | Use content/context signals rather than an untrained issue ID | New-issue recall |
-| Missing or stale integration signals | Follow a missingness-aware or fallback path | Source coverage, feature age, fallback frequency |
-| Permission or organization mismatch | Exclude the issue regardless of score | Authorization failures and candidate-policy tests |
-| Incompatible feature/encoder release | Reject deployment or use a compatible bundle | Version mismatch and rollback success |
+| Situation                            | Intended behavior                                             | What to monitor                                   |
+| ------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------- |
+| Strong validated issue evidence      | Rank the eligible issue with supporting context               | Incorrect high-confidence suggestions             |
+| Ambiguous semantic evidence          | Offer a short list or ask for confirmation                    | Accuracy versus coverage and correction rate      |
+| New issue with little history        | Use content/context signals rather than an untrained issue ID | New-issue recall                                  |
+| Missing or stale integration signals | Follow a missingness-aware or fallback path                   | Source coverage, feature age, fallback frequency  |
+| Permission or organization mismatch  | Exclude the issue regardless of score                         | Authorization failures and candidate-policy tests |
+| Incompatible feature/encoder release | Reject deployment or use a compatible bundle                  | Version mismatch and rollback success             |
 
 An LLM can help encode text or interpret activity context, but generated issue keys still need grounding and authorization. If a model gives an explanation, it should refer only to evidence the system actually has. A plausible explanation is not a substitute for measured issue-inference quality.
 
@@ -292,7 +292,7 @@ That framing leads to concrete choices: retain recurring issues, separate retrie
 
 ## Reproduce the figures
 
-The [Jira-shaped experiment generator](https://github.com/wiwang/wiwang.github.io/blob/master/scripts/articles/generate_tempo_ranking_figures.py) creates all example records, fits the history model, and evaluates each activity request. It needs no Tempo credentials or external data.
+The [Jira-shaped experiment generator](https://github.com/wiwang/wiwang.github.io/blob/master/scripts/articles/generate_tempo_ranking_figures.py) creates all example records, fits the history model, and evaluates each activity request. It needs no service credentials or external data.
 
 ```bash
 python3 -m venv .venv-articles

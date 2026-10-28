@@ -1,6 +1,6 @@
 """Exact illustrative reliability calculations and constructed contract failures.
 
-No benchmark run, trained model, LLM judge, or Tempo/customer data is used.
+No benchmark run, trained model, LLM judge, or customer data is used.
 """
 from pathlib import Path
 import csv
@@ -21,6 +21,8 @@ plt.rcParams.update({'font.family':'DejaVu Sans','font.size':10,'figure.facecolo
 
 def save(fig, name):
     fig.savefig(OUT / f'{name}.svg', bbox_inches='tight', metadata={'Date':None})
+    svg = OUT / f'{name}.svg'
+    svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().splitlines()) + '\n')
     fig.savefig(OUT / f'{name}.png', bbox_inches='tight', dpi=180)
     plt.close(fig)
 
@@ -74,7 +76,7 @@ def architecture():
     box(6.9,2.25,2.9,1.55,'Calibrated judges','Narrow rubric · abstain\nAudit against human labels',color='#b7693b')
     for x in [1.7,5,8.3]:arrow((x,2.15),(x,1.6))
     box(.2,.3,9.6,1.25,'Release decision with a failure diagnosis','Task success + invariants + repeated-run reliability + cost/latency + uncertainty')
-    fig.text(.5,.015,'Proposed Tempo Loop evaluation design; illustrative architecture, not a private deployment diagram.',ha='center',fontsize=9,color='#687078')
+    fig.text(.5,.015,'Agentic Loop Agent evaluation design; illustrative, not a production deployment diagram.',ha='center',fontsize=9,color='#687078')
     save(fig,'evaluation-contract')
 
 
