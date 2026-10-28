@@ -15,6 +15,8 @@ python3 -m venv .venv-articles
 .venv-articles/bin/python scripts/articles/generate_mlops_figures.py
 # Tempo Loop RAG architecture and synthetic retrieval study:
 .venv-articles/bin/python scripts/articles/generate_rag_figures.py
+# Tempo Loop evaluation contracts and exact reliability calculations:
+.venv-articles/bin/python scripts/articles/generate_loop_evals.py
 # Tempo Loop agent reference design and conditional schedule forecasts:
 .venv-articles/bin/python scripts/articles/generate_agentic_ai_figures.py
 ```
@@ -48,3 +50,11 @@ Quantiles and deadline probabilities are conditional on chosen illustrative assu
 ## Tempo Loop RAG retrieval
 
 `generate_rag_figures.py` creates an illustrative architecture and a deterministic BM25 study over 217 synthetic records. Tenant, permission, and availability/validity filters leave 36 eligible records; 30 templated questions cover six UI-selected projects. It compares retrieval without project scope, scoped retrieval, and scoped retrieval with a manually tailored term dictionary. All methods use identical authorization/time constraints, BM25 statistics, and stable ID tie breaking. The dictionary is designed for these same templates: its perfect coverage is a demonstration, not held-out generalization, dense retrieval performance, or answer quality. Raw corpus, query labels, rankings, and metrics are exported. No Tempo data, embeddings, or LLM calls are used. The article is dated November 11, 2025 and revised October 24, 2026.
+
+## Tempo Loop evaluation contracts
+
+`generate_loop_evals.py` creates an illustrative evaluation architecture, exact probability curves for fixed hypothetical p values (0.80, 0.90, 0.95) and independent attempts k=1..8, and exact one-sided binomial upper failure bounds after zero failures in n=60, 300, 1000 cases. No Monte Carlo sampling or model execution is involved. The bounds require the stated independent, representative Bernoulli sampling assumptions.
+
+Eight deliberately constructed structured traces demonstrate a read-only risk-summary contract. Two pass; the others contain wrong scope despite coincidentally correct numbers, stale citations, duplicated-join arithmetic, an unauthorized write, a missing fact, or an unsupported forecast. Six pass the narrow required-number check; two pass all checks. These proportions describe fixture construction and do not estimate agent or LLM-judge quality. The standalone `loop_eval_contracts.py` validates structured values and records only; it does not parse prose, prove source entailment, enforce real permissions, or validate arbitrary SQL. Its public copy and fixture/results files are exported with the figures.
+
+Run the public example with `python3 public/posts/tempo-loop-agent-evals/loop_eval_contracts.py public/posts/tempo-loop-agent-evals/contract-fixtures.json`. This requires only the Python standard library. The article is dated October 28, 2026. This generator was also verified with Python 3.14 and the same pinned NumPy/Matplotlib versions.

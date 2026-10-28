@@ -81,3 +81,7 @@ Version the task set, labels, prompts, model configuration, tools, retriever, an
 A release gate should combine essential invariants with quality and operational budgets. Authorization failures require a different response from a slightly weaker prose score. Latency, cost, retrieval coverage, and completion must also be interpreted together: an agent that succeeds only by repeatedly searching may be operationally unsuitable.
 
 The result of this project was an evidence-grounding pipeline and a structured way to diagnose agent quality across retrieval, tools, data access, and answers. No private benchmark size or numerical quality gain is claimed here. Related work: [the agent platform](/projects/agentic-ai-platform/), [MLOps operations](/mlops-production-systems/), and [the Tempo Loop agent design](/agentic-ai-tempo-loop/).
+
+## Research-informed evaluation design
+
+[Evaluating Tempo Loop Agents](/tempo-loop-agent-evals/) turns the evaluation literature into a proposed task-contract and release-gate design, with executable synthetic grader examples and exact reliability calculations.

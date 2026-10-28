@@ -1,0 +1,9 @@
+trace_id,factual_core,scope,read_only,current_citations,supported_claims,strict_success
+correct_direct,True,True,True,True,True,True
+correct_reordered,True,True,True,True,True,True
+wrong_scope_coincidence,True,False,True,True,True,False
+stale_citations,True,True,True,False,True,False
+duplicated_join,False,True,True,True,True,False
+unauthorized_write,True,True,False,True,True,False
+missing_required_fact,False,True,True,True,True,False
+unsupported_forecast,True,True,True,True,False,False
